@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { mockProducts } from '@/data/mockProducts';
 
 export default function ProductDetail() {
   const params = useParams();
+  const router = useRouter();
   const id = params?.id as string;
   const product = mockProducts.find(p => p.id === id);
 
@@ -141,6 +142,7 @@ export default function ProductDetail() {
               className="btn btn-primary" 
               style={{ width: '100%', padding: '1rem', fontSize: '1.1rem' }}
               disabled={days === 0}
+              onClick={() => router.push(`/checkout/${id}?start=${startDate}&end=${endDate}`)}
             >
               {days > 0 ? 'Lanjut Booking' : 'Pilih Tanggal Dulu'}
             </button>

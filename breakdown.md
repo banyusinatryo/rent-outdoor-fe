@@ -41,10 +41,10 @@ Proyek ini dibangun menggunakan **Next.js 16+ (App Router)**, **TypeScript**, da
   - Kewajiban mengunggah foto identitas (**KTP & Swafoto**) sebagai syarat utama verifikasi identitas (KYC) demi keamanan ekosistem Escrow.
 - Pembuatan *User Dashboard*: Menampilkan profil, riwayat penyewaan, alat yang sedang disewa, dan status pengembalian Uang Jaminan.
 
-## Fase 5: Proses Checkout & Simulasi Pembayaran (⏳ Mendatang)
+## Fase 5: Proses Checkout & Simulasi Pembayaran (✅ Selesai)
 - Halaman Keranjang / Ringkasan Pesanan (*Order Summary*).
-- Form pengisian titik temu (*Meetup*) atau alamat pengiriman.
-- Antarmuka *Payment Gateway Mockup* (simulasi visual halaman pembayaran pihak ketiga).
+- Form pengisian data diri dengan metode pengambilan langsung di toko Vendor.
+- Antarmuka *Payment Gateway Mockup* (simulasi visual halaman pembayaran pihak ketiga) dan halaman sukses.
 
 ## Fase 6: Transisi ke API Laravel (Backend Integration) (⏳ Mendatang)
 - Mengganti seluruh `mockProducts.ts` dengan proses *fetching* (`fetch()`) ke REST API Laravel yang akan dibuat nanti.
