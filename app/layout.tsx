@@ -3,6 +3,7 @@ import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from 'sonner';
 
 const outfit = Outfit({
   variable: "--font-heading",
@@ -32,6 +33,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Toaster theme="dark" position="bottom-right" />
       </body>
     </html>
   );

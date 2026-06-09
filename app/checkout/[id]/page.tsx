@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'sonner';
 import { mockProducts } from '@/data/mockProducts';
 
 export default function CheckoutPage() {
@@ -46,7 +47,7 @@ export default function CheckoutPage() {
   const handlePayment = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !wa) {
-      alert('Mohon lengkapi data diri');
+      toast.error('Mohon lengkapi data diri');
       return;
     }
     router.push(`/payment/${id}?start=${startParam}&end=${endParam}`);

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 import { mockProducts } from '@/data/mockProducts';
 
 export default function PaymentMockupPage() {
@@ -35,7 +37,7 @@ export default function PaymentMockupPage() {
 
   const handlePay = () => {
     if (!method) {
-      alert('Pilih metode pembayaran terlebih dahulu');
+      toast.error('Pilih metode pembayaran terlebih dahulu');
       return;
     }
     setIsLoading(true);
@@ -86,11 +88,12 @@ export default function PaymentMockupPage() {
         </div>
 
         <button 
-          className="btn btn-primary" 
+          className="btn btn-primary flex justify-center items-center gap-xs" 
           onClick={handlePay}
           disabled={isLoading}
-          style={{ width: '100%', padding: '1.2rem', fontSize: '1.1rem', position: 'relative' }}
+          style={{ width: '100%', padding: '1.2rem', fontSize: '1.1rem', position: 'relative', opacity: isLoading ? 0.7 : 1 }}
         >
+          {isLoading && <Loader2 className="animate-spin" size={20} />}
           {isLoading ? 'Memproses...' : 'Bayar Sekarang'}
         </button>
         

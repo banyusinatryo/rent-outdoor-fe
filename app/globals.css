@@ -159,6 +159,34 @@ button {
   animation: fadeIn var(--transition-slow) forwards;
 }
 
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
 /* Flex & Grid Utilities */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
@@ -182,4 +210,9 @@ button {
   .grid-cols-2, .grid-cols-3, .grid-cols-4 {
     grid-template-columns: repeat(1, 1fr);
   }
+  .hide-on-mobile { display: none !important; }
+}
+
+@media (min-width: 769px) {
+  .show-on-mobile { display: none !important; }
 }
