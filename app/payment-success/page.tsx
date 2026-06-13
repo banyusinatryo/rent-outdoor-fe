@@ -21,8 +21,8 @@ export default function PaymentSuccessPage() {
       
       <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Pembayaran Berhasil!</h1>
       <p className="text-muted" style={{ maxWidth: '500px', margin: '0 auto 2rem', lineHeight: 1.6 }}>
-        Pesanan Anda telah dikonfirmasi dan dana telah diamankan di sistem Escrow kami. 
-        Silakan hubungi Vendor untuk mengatur waktu pengambilan barang di toko.
+        Pesanan Anda telah dikonfirmasi. 
+        Silakan datang ke toko kami dengan membawa bukti pembayaran ini dan identitas asli (KTP/SIM) untuk pengambilan barang.
       </p>
 
       <div className="flex gap-sm justify-center">

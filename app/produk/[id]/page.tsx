@@ -42,7 +42,7 @@ export default function ProductDetail() {
   }
 
   const rentalTotal = days * product.pricePerDay;
-  const grandTotal = rentalTotal + product.securityDeposit;
+  const grandTotal = rentalTotal;
 
   return (
     <div className="container" style={{ paddingTop: '100px', paddingBottom: 'var(--space-xl)' }}>
@@ -64,9 +64,7 @@ export default function ProductDetail() {
               {product.category}
             </div>
             <div className="flex items-center gap-xs">
-              <span style={{ fontSize: '1.2rem' }}>👤</span>
-              <span className="text-muted" style={{ fontSize: '0.9rem' }}>Vendor: <strong style={{ color: 'var(--color-text)' }}>{product.vendor.name}</strong></span>
-              {product.vendor.isVerified && <span style={{ color: '#4ade80', fontSize: '0.8rem' }}>✓ Terverifikasi</span>}
+              <span style={{ color: '#4ade80', fontSize: '0.8rem' }}>✓ Tersedia di Toko</span>
             </div>
           </div>
 
@@ -91,7 +89,7 @@ export default function ProductDetail() {
             </h2>
             <div className="flex items-center gap-xs" style={{ marginBottom: '2rem' }}>
               <span style={{ color: '#ffb347', fontSize: '1.2rem' }}>★</span>
-              <span>{product.vendor.rating}</span>
+              <span>Kondisi Prima</span>
             </div>
 
             <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>Pilih Tanggal Sewa</h3>
@@ -125,15 +123,15 @@ export default function ProductDetail() {
                   <span>Rp {rentalTotal.toLocaleString('id-ID')}</span>
                 </div>
                 <div className="flex justify-between" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-                  <span className="text-muted">Uang Jaminan (Escrow)</span>
-                  <span>Rp {product.securityDeposit.toLocaleString('id-ID')}</span>
+                  <span className="text-muted">Jaminan Identitas</span>
+                  <span>KTP/SIM (Ditahan di toko)</span>
                 </div>
                 <div className="flex justify-between" style={{ fontWeight: 700, fontSize: '1.2rem', borderTop: '1px dashed var(--color-border)', paddingTop: '1rem' }}>
                   <span>Total Bayar</span>
                   <span className="text-gradient-primary">Rp {grandTotal.toLocaleString('id-ID')}</span>
                 </div>
                 <p className="text-muted" style={{ fontSize: '0.75rem', marginTop: '1rem', textAlign: 'center' }}>
-                  *Uang Jaminan akan dikembalikan 100% setelah alat dikembalikan tanpa kerusakan.
+                  *Identitas KTP/SIM asli wajib dititipkan di toko saat pengambilan alat.
                 </p>
               </div>
             )}

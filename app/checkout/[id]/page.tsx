@@ -42,7 +42,7 @@ export default function CheckoutPage() {
   }
 
   const rentalTotal = days * product.pricePerDay;
-  const grandTotal = rentalTotal + product.securityDeposit;
+  const grandTotal = rentalTotal;
 
   const handlePayment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,8 +96,8 @@ export default function CheckoutPage() {
               <div className="flex items-center gap-sm">
                 <span style={{ fontSize: '1.5rem' }}>📍</span>
                 <div>
-                  <h4 style={{ marginBottom: '0.2rem' }}>Ambil di Toko Vendor</h4>
-                  <p className="text-muted" style={{ fontSize: '0.85rem' }}>Penyewa datang langsung ke alamat <strong>{product.vendor.name}</strong>.</p>
+                  <h4 style={{ marginBottom: '0.2rem' }}>Ambil di Toko</h4>
+                  <p className="text-muted" style={{ fontSize: '0.85rem' }}>Penyewa datang langsung ke alamat <strong>Nexus Outdoor</strong>.</p>
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function CheckoutPage() {
               </div>
               <div>
                 <h4 style={{ fontSize: '1rem', marginBottom: '0.2rem' }}>{product.name}</h4>
-                <p className="text-muted" style={{ fontSize: '0.85rem' }}>Vendor: {product.vendor.name}</p>
+                <p className="text-muted" style={{ fontSize: '0.85rem' }}>Toko: Nexus Outdoor</p>
               </div>
             </div>
 
@@ -139,8 +139,8 @@ export default function CheckoutPage() {
               <span>Rp {rentalTotal.toLocaleString('id-ID')}</span>
             </div>
             <div className="flex justify-between" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-              <span className="text-muted">Uang Jaminan (Escrow)</span>
-              <span>Rp {product.securityDeposit.toLocaleString('id-ID')}</span>
+              <span className="text-muted">Jaminan Identitas</span>
+              <span>KTP/SIM Asli (Ditahan di toko)</span>
             </div>
             
             <div className="flex justify-between" style={{ fontWeight: 700, fontSize: '1.2rem', borderTop: '1px dashed var(--color-border)', paddingTop: '1rem' }}>

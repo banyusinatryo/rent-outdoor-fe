@@ -39,7 +39,7 @@ export default function CaraKerja() {
             Bagaimana <span className="text-gradient-primary">Nexus Outdoor</span> Bekerja?
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-muted" style={{ fontSize: '1.2rem', lineHeight: 1.6 }}>
-            Kami menggunakan sistem <strong>Escrow (Rekening Bersama)</strong> untuk memastikan penyewa mendapatkan alat yang sesuai, dan pemilik alat terhindar dari risiko kerusakan/kehilangan.
+            Kami menerapkan sistem <strong>Verifikasi & Penahanan Identitas Asli</strong> untuk memastikan keamanan persewaan, menjaga kualitas perlengkapan, dan menjamin kelancaran petualangan Anda.
           </motion.p>
         </motion.div>
 
@@ -55,9 +55,9 @@ export default function CaraKerja() {
               <ShieldCheck size={40} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>1. Booking & Pembayaran (Escrow)</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>1. Booking & Pembayaran</h3>
               <p className="text-muted" style={{ fontSize: '1.05rem', lineHeight: 1.6 }}>
-                Penyewa memilih alat dan tanggal sewa. Saat membayar, uang yang ditransfer adalah <strong>Harga Sewa + Uang Jaminan</strong>. Dana ini tidak langsung diberikan ke pemilik alat, melainkan ditahan dengan aman oleh sistem Nexus Outdoor.
+                Penyewa memilih perlengkapan dan menentukan rentang tanggal sewa. Pembayaran (DP atau Lunas) dilakukan secara aman melalui platform kami untuk mengunci ketersediaan barang.
               </p>
             </div>
           </motion.div>
@@ -68,9 +68,9 @@ export default function CaraKerja() {
               <MapPin size={40} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>2. Pengambilan & Pemakaian Alat</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>2. Pengambilan & Penahanan KTP</h3>
               <p className="text-muted" style={{ fontSize: '1.05rem', lineHeight: 1.6 }}>
-                Penyewa mengambil alat di lokasi pemilik. Pemilik merasa tenang karena sistem sudah mengunci Uang Jaminan. Penyewa bisa bertualang dengan perlengkapan yang sudah dipesan.
+                Ambil perlengkapan di toko fisik kami dengan menunjukkan bukti booking. Sebagai jaminan keamanan alat, kami akan <strong>menahan identitas asli Anda (KTP/SIM/STNK)</strong> selama masa sewa berlangsung.
               </p>
             </div>
           </motion.div>
@@ -81,9 +81,9 @@ export default function CaraKerja() {
               <Banknote size={40} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>3. Pengembalian & Pencairan Dana</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>3. Pengembalian Alat & Identitas</h3>
               <p className="text-muted" style={{ fontSize: '1.05rem', lineHeight: 1.6 }}>
-                Alat dikembalikan ke pemilik. Setelah pemilik memverifikasi bahwa alat tidak rusak/hilang, sistem memecah dana: Harga Sewa cair ke dompet pemilik, dan <strong>Uang Jaminan 100% kembali</strong> ke penyewa.
+                Setelah selesai, kembalikan perlengkapan ke toko kami tepat waktu. Kami akan melakukan inspeksi kondisi barang, dan <strong>identitas KTP Anda akan langsung dikembalikan</strong> jika tidak ada kerusakan atau denda keterlambatan.
               </p>
             </div>
           </motion.div>

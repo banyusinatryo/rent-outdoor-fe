@@ -6,11 +6,6 @@ export interface Product {
   securityDeposit: number;
   description: string;
   image: string;
-  vendor: {
-    name: string;
-    isVerified: boolean;
-    rating: number;
-  };
   features: string[];
 }
 
@@ -23,11 +18,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 500000,
     description: "Tenda dome kapasitas 4 orang dengan frame alloy kokoh. Cocok untuk cuaca ekstrem dan badai pegunungan tropis. Sudah termasuk pasak dan tali.",
     image: "/images/gear_tent.png",
-    vendor: {
-      name: "Nexus Official",
-      isVerified: true,
-      rating: 4.9,
-    },
     features: ["Kapasitas 4 Orang", "Frame Alloy", "Double Layer", "Anti Badai"],
   },
   {
@@ -38,11 +28,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 400000,
     description: "Tenda kapasitas 2 orang yang sangat ringan (hanya 1.2kg), material nylon silnylon tahan air untuk pergerakan cepat (Fast & Light).",
     image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&q=80",
-    vendor: {
-      name: "FastHike Gear",
-      isVerified: true,
-      rating: 4.8,
-    },
     features: ["Kapasitas 2 Orang", "Berat 1.2kg", "Material Silnylon", "Waterproof 5000mm"],
   },
   {
@@ -53,11 +38,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 250000,
     description: "Tas gunung (carrier) 60 Liter dengan sistem backsystem ergonomis dan bantalan empuk. Tidak membuat punggung sakit untuk pendakian panjang.",
     image: "/images/gear_backpack.png",
-    vendor: {
-      name: "Outdoor Gear BDG",
-      isVerified: true,
-      rating: 4.7,
-    },
     features: ["Kapasitas 60L", "Ergonomic Backsystem", "Termasuk Raincover", "Banyak Kantong"],
   },
   {
@@ -68,11 +48,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 200000,
     description: "Tas daypack/carrier 40L tanpa frame rigid, sangat ringan, cocok untuk summit attack atau tektok.",
     image: "/images/gear_backpack.png",
-    vendor: {
-      name: "FastHike Gear",
-      isVerified: true,
-      rating: 4.6,
-    },
     features: ["Kapasitas 40L", "Frameless", "Roll-top Closure", "Bahan Dyneema"],
   },
   {
@@ -83,11 +58,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 300000,
     description: "Sepatu hiking mid-cut dengan lapisan waterproof Gore-Tex dan sole Vibram untuk cengkeraman maksimal di medan licin dan berbatu.",
     image: "/images/gear_shoes.png",
-    vendor: {
-      name: "Trekker Sejati",
-      isVerified: false,
-      rating: 4.5,
-    },
     features: ["Waterproof", "Sole Vibram", "Mid-Cut Support", "Ukuran 40-44"],
   },
   {
@@ -98,11 +68,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 350000,
     description: "Jaket hardshell anti angin dan air. Didesain untuk menahan hawa dingin ekstrem di puncak gunung dengan sirkulasi udara (pit zips).",
     image: "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=800&q=80",
-    vendor: {
-      name: "Nexus Official",
-      isVerified: true,
-      rating: 4.9,
-    },
     features: ["Gore-Tex Membran", "Windproof", "Pit Zips (Sirkulasi)", "Hoodie Adjustable"],
   },
   {
@@ -113,11 +78,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 100000,
     description: "Kompor camping lipat ultralight berbahan titanium. Api biru dan sangat stabil, bobot hanya 200 gram.",
     image: "/images/gear_stove.png",
-    vendor: {
-      name: "Nexus Official",
-      isVerified: true,
-      rating: 4.8,
-    },
     features: ["Bahan Titanium", "Ultralight 200g", "Api Biru Stabil", "Praktis Dilipat"],
   },
   {
@@ -128,11 +88,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 150000,
     description: "Satu set peralatan masak teflon anti lengket. Terdiri dari panci, wajan penggorengan, dan teko air kecil. Pas untuk 3 orang.",
     image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80",
-    vendor: {
-      name: "Outdoor Gear BDG",
-      isVerified: true,
-      rating: 4.6,
-    },
     features: ["Teflon Anti Lengket", "Ringkas (Stackable)", "Kapasitas 3 Orang", "Ringan"],
   },
   {
@@ -143,11 +98,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 150000,
     description: "Sleeping bag tipe mummy dengan isian polar bulu tebal. Nyaman menahan suhu hingga 0 derajat celcius.",
     image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&q=80",
-    vendor: {
-      name: "Trekker Sejati",
-      isVerified: false,
-      rating: 4.4,
-    },
     features: ["Tipe Mummy", "Bahan Dalam Polar Bulu", "Limit Suhu 0°C", "Mudah Digulung"],
   },
   {
@@ -158,11 +108,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 100000,
     description: "Sepasang tongkat pendaki berbahan carbon fiber yang sangat kuat namun ringan. Melindungi lutut Anda saat turun gunung.",
     image: "https://images.unsplash.com/photo-1517457211119-21699f8d1671?w=800&q=80",
-    vendor: {
-      name: "FastHike Gear",
-      isVerified: true,
-      rating: 4.8,
-    },
     features: ["Bahan Carbon Fiber", "Anti-Shock System", "Handle Cork", "Set (2 buah)"],
   },
   {
@@ -173,11 +118,6 @@ export const mockProducts: Product[] = [
     securityDeposit: 80000,
     description: "Senter kepala yang sangat terang dengan baterai isi ulang (USB-C). Tahan air ringan, pas untuk summit malam.",
     image: "https://images.unsplash.com/photo-1506544777-64cfbea165c7?w=800&q=80",
-    vendor: {
-      name: "Nexus Official",
-      isVerified: true,
-      rating: 4.9,
-    },
     features: ["Terang 500 Lumens", "Baterai Cas USB-C", "Tahan Cipratan Air", "Mode Kedip/Merah"],
   }
 ];

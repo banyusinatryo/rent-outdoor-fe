@@ -77,7 +77,7 @@ export default function Home() {
               marginBottom: '1.5rem',
               border: '1px solid var(--color-border-glow)'
             }}>
-              <ShieldCheck size={16} /> Penyewaan Alat Gunung #1 dengan Escrow Aman
+              <ShieldCheck size={16} /> Penyewaan Alat Gunung Terlengkap & Aman
             </motion.span>
             
             <motion.h1 variants={fadeInUp} style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
@@ -85,7 +85,7 @@ export default function Home() {
             </motion.h1>
             
             <motion.p variants={fadeInUp} className="text-muted" style={{ fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: 1.6 }}>
-              Temukan tenda, carrier, dan gear premium dari vendor terpercaya. Transaksi dijamin aman 100% dengan uang jaminan otomatis kembali.
+              Koleksi terlengkap tenda, carrier, dan gear premium milik toko kami. Transaksi sewa dijamin aman, terawat, dan siap pakai.
             </motion.p>
             
             <motion.div variants={fadeInUp} className="flex gap-sm">
@@ -96,7 +96,7 @@ export default function Home() {
               </Link>
               <Link href="/cara-kerja">
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn glass" style={{ padding: '1rem 2rem', fontSize: '1.1rem', color: '#fff' }}>
-                  Pelajari Escrow
+                  Cara Kerja
                 </motion.button>
               </Link>
             </motion.div>
@@ -189,9 +189,9 @@ export default function Home() {
             variants={fadeInUp}
             className="text-center" style={{ marginBottom: 'var(--space-lg)' }}
           >
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Sistem Aman & <span className="text-gradient-primary">Terpercaya</span></h2>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Sistem Booking & <span className="text-gradient-primary">Pengambilan Mudah</span></h2>
             <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
-              Infrastruktur transaksi kami dirancang dengan sistem Escrow otomatis. Dana ditahan dengan aman hingga alat kembali dalam kondisi utuh.
+              Sistem kami memudahkan Anda untuk menyewa perlengkapan dari toko kami. Booking dari rumah, ambil di toko dengan mudah.
             </p>
           </motion.div>
 
@@ -204,9 +204,9 @@ export default function Home() {
               <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem', background: 'rgba(16,112,176,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)' }}>
                 <ShieldCheck size={40} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>1. Booking & Bayar Jaminan</h3>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>1. Booking & Bayar</h3>
               <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-                Penyewa membayar biaya sewa beserta Uang Jaminan (Security Deposit). Dana disimpan secara aman di rekening platform (Escrow).
+                Pilih barang di katalog, tentukan tanggal sewa, dan lakukan pembayaran DP/Lunas melalui platform dengan aman.
               </p>
             </motion.div>
             
@@ -214,9 +214,9 @@ export default function Home() {
               <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem', background: 'rgba(255,107,53,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-accent)' }}>
                 <MapPin size={40} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>2. Ambil Alat & Bertualang</h3>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>2. Ambil & Tinggalkan KTP</h3>
               <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-                Ambil alat langsung di lokasi vendor. Status berubah otomatis dan alat dikunci di kalender untuk tanggal tersebut.
+                Ambil alat di toko fisik kami dan tunjukkan bukti booking. Kami akan menahan identitas asli (KTP/SIM) Anda selama masa sewa sebagai jaminan.
               </p>
             </motion.div>
 
@@ -224,9 +224,9 @@ export default function Home() {
               <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem', background: 'rgba(74,222,128,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4ade80' }}>
                 <Banknote size={40} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>3. Alat Kembali, Dana Cair</h3>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>3. Kembalikan & Ambil KTP</h3>
               <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-                Setelah alat dikembalikan tanpa kerusakan, Uang Jaminan 100% dikembalikan. Pendapatan Vendor masuk ke Wallet Balance.
+                Kembalikan alat tepat waktu tanpa kerusakan fisik, dan KTP/SIM Anda akan langsung kami kembalikan utuh.
               </p>
             </motion.div>
           </motion.div>

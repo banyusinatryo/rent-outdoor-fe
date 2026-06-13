@@ -39,7 +39,7 @@ export default function Tentang() {
               Mendemokratisasi Akses ke <span className="text-gradient-primary">Alam Bebas.</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-muted" style={{ fontSize: '1.15rem', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Di Nexus Outdoor, kami percaya bahwa setiap orang berhak menikmati keindahan alam tanpa harus terhalang oleh mahalnya harga peralatan gunung. Kami hadir untuk menghubungkan para petualang dengan pemilik alat lokal dalam sebuah ekosistem berbagi yang aman dan terpercaya.
+              Di Nexus Outdoor, kami percaya bahwa setiap orang berhak menikmati keindahan alam tanpa harus terhalang oleh mahalnya harga peralatan gunung. Kami hadir untuk menyediakan perlengkapan berkualitas tinggi yang disewakan dengan proses yang aman dan mudah.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-sm">
               <Link href="/katalog">
@@ -81,8 +81,8 @@ export default function Tentang() {
               <div style={{ width: '70px', height: '70px', margin: '0 auto 1.5rem', background: 'rgba(255,107,53,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)' }}>
                 <HeartHandshake size={32} />
               </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>Kepercayaan Komunitas</h3>
-              <p className="text-muted" style={{ lineHeight: 1.6 }}>Sistem Escrow kami dan ulasan transparan memastikan bahwa penyewa dan vendor lokal saling menghargai dan menjaga aset bersama.</p>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>Keamanan Transaksi</h3>
+              <p className="text-muted" style={{ lineHeight: 1.6 }}>Sistem penahanan identitas asli kami memastikan keamanan alat terjaga dengan baik, memberikan kedamaian pikiran baik bagi toko maupun penyewa.</p>
             </motion.div>
             
             <motion.div variants={fadeInUp} className="glass hover-lift" style={{ padding: '2.5rem', borderRadius: 'var(--radius-lg)', textAlign: 'center' }}>
@@ -109,11 +109,11 @@ export default function Tentang() {
             </div>
             <div>
               <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--color-accent)', marginBottom: '0.5rem' }}>500+</div>
-              <div className="text-muted" style={{ fontSize: '1.1rem', fontWeight: 500 }}>Vendor Terverifikasi</div>
+              <div className="text-muted" style={{ fontSize: '1.1rem', fontWeight: 500 }}>Pelanggan Aktif</div>
             </div>
             <div>
-              <div style={{ fontSize: '3rem', fontWeight: 800, color: '#4ade80', marginBottom: '0.5rem' }}>0%</div>
-              <div className="text-muted" style={{ fontSize: '1.1rem', fontWeight: 500 }}>Tingkat Penipuan (Escrow)</div>
+              <div style={{ fontSize: '3rem', fontWeight: 800, color: '#4ade80', marginBottom: '0.5rem' }}>100%</div>
+              <div className="text-muted" style={{ fontSize: '1.1rem', fontWeight: 500 }}>Barang Terawat</div>
             </div>
             <div>
               <div style={{ fontSize: '3rem', fontWeight: 800, color: '#fff', marginBottom: '0.5rem' }}>24/7</div>

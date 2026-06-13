@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <h3 className="text-gradient-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Nexus Outdoor.</h3>
           <p className="text-muted" style={{ fontSize: '0.9rem' }}>
-            Platform marketplace penyewaan alat outdoor terpercaya dengan sistem Escrow yang aman. Temukan gear kemah premium atau sewakan gear Anda.
+            Platform penyewaan alat outdoor terpercaya dengan sistem keamanan penitipan identitas. Temukan gear kemah premium dari toko kami.
           </p>
         </div>
         
@@ -24,7 +24,7 @@ export default function Footer() {
         <div>
           <h4 style={{ marginBottom: '1rem', color: '#fff' }}>Informasi</h4>
           <div className="flex flex-col gap-sm" style={{ fontSize: '0.9rem' }}>
-            <Link href="/cara-kerja" className="text-muted">Cara Kerja (Escrow)</Link>
+            <Link href="/cara-kerja" className="text-muted">Cara Kerja</Link>
             <Link href="/syarat" className="text-muted">Syarat & Ketentuan</Link>
             <Link href="/privasi" className="text-muted">Kebijakan Privasi</Link>
             <Link href="/faq" className="text-muted">FAQ</Link>
@@ -32,12 +32,12 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 style={{ marginBottom: '1rem', color: '#fff' }}>Mulai Menghasilkan</h4>
+          <h4 style={{ marginBottom: '1rem', color: '#fff' }}>Alamat Toko</h4>
           <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>
-            Punya alat gunung yang menganggur? Jadilah Vendor dan raih pendapatan tambahan.
+            Jl. Pendaki Gunung No. 123, Bandung, Jawa Barat.
           </p>
-          <Link href="/vendor/register" className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
-            Daftar Jadi Vendor
+          <Link href="/katalog" className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
+            Lihat Katalog
           </Link>
         </div>
       </div>

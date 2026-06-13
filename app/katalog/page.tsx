@@ -141,8 +141,8 @@ export default function Katalog() {
                     {/* Content */}
                     <div style={{ padding: '1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                       <div className="flex items-center gap-xs" style={{ marginBottom: '0.5rem' }}>
-                        {product.vendor.isVerified && <BadgeCheck size={14} color="#4ade80" />}
-                        <span className="text-muted" style={{ fontSize: '0.8rem' }}>{product.vendor.name}</span>
+                        <BadgeCheck size={14} color="#4ade80" />
+                        <span className="text-muted" style={{ fontSize: '0.8rem' }}>Nexus Outdoor</span>
                       </div>
                       <h3 style={{ fontSize: '1.15rem', marginBottom: '1rem', lineHeight: 1.4, flexGrow: 1 }}>{product.name}</h3>
                       <div className="flex items-center justify-between" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem', marginTop: 'auto' }}>

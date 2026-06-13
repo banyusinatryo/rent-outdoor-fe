@@ -39,10 +39,7 @@ export default function Register() {
           <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>
             Sudah punya akun? <Link href="/login" className="text-gradient-primary" style={{ fontWeight: 600 }}>Login di sini</Link>
           </p>
-          <div style={{ background: 'var(--color-bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-sm)' }}>
-            <p className="text-muted" style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>Punya toko / barang yang mau disewakan?</p>
-            <Link href="/vendor" style={{ color: '#4ade80', fontWeight: 600, fontSize: '0.9rem' }}>Gabung jadi Mitra Vendor &rarr;</Link>
-          </div>
+
         </div>
       </div>
     </div>
