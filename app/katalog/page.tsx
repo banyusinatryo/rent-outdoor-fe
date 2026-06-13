@@ -147,7 +147,7 @@ export default function Katalog() {
                       <h3 style={{ fontSize: '1.15rem', marginBottom: '1rem', lineHeight: 1.4, flexGrow: 1 }}>{product.name}</h3>
                       <div className="flex items-center justify-between" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem', marginTop: 'auto' }}>
                         <div>
-                          <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-primary)' }}>
+                          <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-accent)' }}>
                             Rp {product.pricePerDay.toLocaleString('id-ID')}
                           </span>
                           <span className="text-muted" style={{ fontSize: '0.8rem' }}> /hr</span>

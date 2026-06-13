@@ -13,7 +13,7 @@ export default function Login() {
       <div className="glass animate-fade-in" style={{ width: '100%', maxWidth: '450px', padding: '3rem', borderRadius: 'var(--radius-lg)' }}>
         <div className="text-center" style={{ marginBottom: '2rem' }}>
           <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Selamat Datang</h1>
-          <p className="text-muted">Masuk ke akun PeakRent Anda.</p>
+          <p className="text-muted">Masuk ke akun Nexus Outdoor Anda.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-sm">

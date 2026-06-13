@@ -5,7 +5,7 @@ export default function Footer() {
     <footer style={{ borderTop: '1px solid var(--color-border)', padding: 'var(--space-lg) 0', marginTop: 'var(--space-xl)', background: 'var(--color-bg-secondary)' }}>
       <div className="container grid grid-cols-4 gap-lg">
         <div>
-          <h3 className="text-gradient-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>PeakRent.</h3>
+          <h3 className="text-gradient-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Nexus Outdoor.</h3>
           <p className="text-muted" style={{ fontSize: '0.9rem' }}>
             Platform marketplace penyewaan alat outdoor terpercaya dengan sistem Escrow yang aman. Temukan gear kemah premium atau sewakan gear Anda.
           </p>
@@ -43,7 +43,7 @@ export default function Footer() {
       </div>
       
       <div className="container text-center text-muted" style={{ marginTop: 'var(--space-lg)', paddingTop: 'var(--space-md)', borderTop: '1px solid var(--color-border)', fontSize: '0.85rem' }}>
-        &copy; {new Date().getFullYear()} PeakRent. All rights reserved.
+        &copy; {new Date().getFullYear()} Nexus Outdoor. All rights reserved.
       </div>
     </footer>
   );

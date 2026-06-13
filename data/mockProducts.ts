@@ -24,7 +24,7 @@ export const mockProducts: Product[] = [
     description: "Tenda dome kapasitas 4 orang dengan frame alloy kokoh. Cocok untuk cuaca ekstrem dan badai pegunungan tropis. Sudah termasuk pasak dan tali.",
     image: "/images/gear_tent.png",
     vendor: {
-      name: "PeakRent Official",
+      name: "Nexus Official",
       isVerified: true,
       rating: 4.9,
     },
@@ -99,7 +99,7 @@ export const mockProducts: Product[] = [
     description: "Jaket hardshell anti angin dan air. Didesain untuk menahan hawa dingin ekstrem di puncak gunung dengan sirkulasi udara (pit zips).",
     image: "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=800&q=80",
     vendor: {
-      name: "PeakRent Official",
+      name: "Nexus Official",
       isVerified: true,
       rating: 4.9,
     },
@@ -114,7 +114,7 @@ export const mockProducts: Product[] = [
     description: "Kompor camping lipat ultralight berbahan titanium. Api biru dan sangat stabil, bobot hanya 200 gram.",
     image: "/images/gear_stove.png",
     vendor: {
-      name: "PeakRent Official",
+      name: "Nexus Official",
       isVerified: true,
       rating: 4.8,
     },
@@ -174,7 +174,7 @@ export const mockProducts: Product[] = [
     description: "Senter kepala yang sangat terang dengan baterai isi ulang (USB-C). Tahan air ringan, pas untuk summit malam.",
     image: "https://images.unsplash.com/photo-1506544777-64cfbea165c7?w=800&q=80",
     vendor: {
-      name: "PeakRent Official",
+      name: "Nexus Official",
       isVerified: true,
       rating: 4.9,
     },

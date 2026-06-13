@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -37,16 +36,10 @@ export default function Navbar() {
       }} 
     >
       <div className="container flex items-center justify-between">
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ position: 'relative', width: '130px', height: '40px' }}>
-            <Image 
-              src="/images/nexus logo.png" 
-              alt="Nexus Outdoor" 
-              fill 
-              style={{ objectFit: 'contain', objectPosition: 'left' }}
-              priority
-            />
-          </div>
+        <Link href="/">
+          <span style={{ fontSize: '1.8rem', fontWeight: 800, letterSpacing: '-0.5px' }} className="text-gradient-primary">
+            PeakRent.
+          </span>
         </Link>
 
         {/* Desktop Menu */}

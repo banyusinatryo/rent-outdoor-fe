@@ -36,7 +36,7 @@ export default function CaraKerja() {
             </span>
           </motion.div>
           <motion.h1 variants={fadeInUp} style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-1px', marginBottom: '1rem' }}>
-            Bagaimana <span className="text-gradient-primary">PeakRent</span> Bekerja?
+            Bagaimana <span className="text-gradient-primary">Nexus Outdoor</span> Bekerja?
           </motion.h1>
           <motion.p variants={fadeInUp} className="text-muted" style={{ fontSize: '1.2rem', lineHeight: 1.6 }}>
             Kami menggunakan sistem <strong>Escrow (Rekening Bersama)</strong> untuk memastikan penyewa mendapatkan alat yang sesuai, dan pemilik alat terhindar dari risiko kerusakan/kehilangan.
@@ -57,7 +57,7 @@ export default function CaraKerja() {
             <div>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>1. Booking & Pembayaran (Escrow)</h3>
               <p className="text-muted" style={{ fontSize: '1.05rem', lineHeight: 1.6 }}>
-                Penyewa memilih alat dan tanggal sewa. Saat membayar, uang yang ditransfer adalah <strong>Harga Sewa + Uang Jaminan</strong>. Dana ini tidak langsung diberikan ke pemilik alat, melainkan ditahan dengan aman oleh sistem PeakRent.
+                Penyewa memilih alat dan tanggal sewa. Saat membayar, uang yang ditransfer adalah <strong>Harga Sewa + Uang Jaminan</strong>. Dana ini tidak langsung diberikan ke pemilik alat, melainkan ditahan dengan aman oleh sistem Nexus Outdoor.
               </p>
             </div>
           </motion.div>

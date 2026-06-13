@@ -88,7 +88,7 @@ export default function VendorRegister() {
           <div style={{ marginTop: '2rem' }}>
             <label className="flex items-center gap-xs" style={{ cursor: 'pointer', marginBottom: '1.5rem' }}>
               <input required type="checkbox" style={{ width: '18px', height: '18px', accentColor: '#4ade80' }} />
-              <span className="text-muted" style={{ fontSize: '0.9rem' }}>Saya setuju dengan Syarat & Ketentuan Kemitraan PeakRent serta potongan komisi platform sebesar 15%.</span>
+              <span className="text-muted" style={{ fontSize: '0.9rem' }}>Saya setuju dengan Syarat & Ketentuan Kemitraan Nexus Outdoor serta potongan komisi platform sebesar 15%.</span>
             </label>
             <button type="submit" className="btn" style={{ background: '#4ade80', color: '#0f1110', width: '100%', padding: '1rem', fontSize: '1.1rem' }}>
               Kirim Pendaftaran

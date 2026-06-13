@@ -16,8 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PeakRent - Marketplace Sewa Alat Outdoor",
-  description: "Sewa alat gunung premium dengan sistem Escrow aman. Temukan tenda, carrier, dan gear kemah terbaik.",
+  title: "Nexus Outdoor - Sewa Alat Kemah",
+  description: "Marketplace penyewaan alat kemah terlengkap.",
 };
 
 export default function RootLayout({
@@ -26,8 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${outfit.variable} ${inter.variable}`}>
-      <body>
+    <html lang="id">
+      <body className={`${outfit.variable} ${inter.variable}`}>
+        <div className="noise-overlay"></div>
         <Navbar />
         <main style={{ minHeight: '80vh' }}>
           {children}

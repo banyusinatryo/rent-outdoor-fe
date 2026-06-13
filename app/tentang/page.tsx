@@ -39,7 +39,7 @@ export default function Tentang() {
               Mendemokratisasi Akses ke <span className="text-gradient-primary">Alam Bebas.</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-muted" style={{ fontSize: '1.15rem', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Di PeakRent, kami percaya bahwa setiap orang berhak menikmati keindahan alam tanpa harus terhalang oleh mahalnya harga peralatan gunung. Kami hadir untuk menghubungkan para petualang dengan pemilik alat lokal dalam sebuah ekosistem berbagi yang aman dan terpercaya.
+              Di Nexus Outdoor, kami percaya bahwa setiap orang berhak menikmati keindahan alam tanpa harus terhalang oleh mahalnya harga peralatan gunung. Kami hadir untuk menghubungkan para petualang dengan pemilik alat lokal dalam sebuah ekosistem berbagi yang aman dan terpercaya.
             </motion.p>
             <motion.div variants={fadeInUp} className="flex gap-sm">
               <Link href="/katalog">
