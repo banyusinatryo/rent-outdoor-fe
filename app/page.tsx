@@ -3,232 +3,375 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Tent, Backpack, Compass, ShieldCheck, Banknote, MapPin } from "lucide-react";
+import { Tent, Backpack, Compass, ShieldCheck, Banknote, MapPin, ArrowRight, Star } from "lucide-react";
+import { mockProducts } from "@/data/mockProducts";
 
 export default function Home() {
   const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  };
+
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  };
+
+  const fadeInRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      transition: { staggerChildren: 0.15 },
+    },
   };
+
+  const featuredProducts = mockProducts.slice(0, 4);
 
   return (
     <>
       {/* Animated Background Blobs */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-        <div className="animate-blob" style={{ position: 'absolute', top: '-10%', left: '-10%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(16,112,176,0.15) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%', filter: 'blur(40px)' }} />
-        <div className="animate-blob animation-delay-2000" style={{ position: 'absolute', top: '40%', right: '-10%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(255,107,53,0.1) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%', filter: 'blur(60px)' }} />
-        <div className="animate-blob animation-delay-4000" style={{ position: 'absolute', bottom: '-20%', left: '20%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(16,112,176,0.1) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%', filter: 'blur(40px)' }} />
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="animate-blob" style={{ position: "absolute", top: "-10%", left: "-10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(60px)" }} />
+        <div className="animate-blob animation-delay-2000" style={{ position: "absolute", top: "50%", right: "-10%", width: "600px", height: "600px", background: "radial-gradient(circle, rgba(255, 85, 0, 0.12) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(70px)" }} />
+        <div className="animate-blob animation-delay-4000" style={{ position: "absolute", bottom: "-15%", left: "30%", width: "400px", height: "400px", background: "radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%)", borderRadius: "50%", filter: "blur(50px)" }} />
       </div>
 
-      {/* HERO SECTION */}
-      <section style={{ 
-        position: 'relative', 
-        height: '100vh', 
-        display: 'flex', 
-        alignItems: 'center',
-        paddingTop: '60px',
-        overflow: 'hidden'
-      }}>
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0, bottom: 0,
-          zIndex: 1
-        }}>
-          <Image 
-            src="/images/hero_camping.png" 
-            alt="Camping in the mountains at twilight" 
+      {/* ═══════════════════════════════════════
+          HERO — Cinematic Full-Width
+      ═══════════════════════════════════════ */}
+      <section style={{ position: "relative", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+        {/* Background Image */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }}>
+          <Image
+            src="/images/hero_camping.png"
+            alt="Camping under the stars"
             fill
             priority
             unoptimized
-            style={{ objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.5)' }}
+            style={{ objectFit: "cover", objectPosition: "center" }}
           />
-          <div style={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0, bottom: 0,
-            background: 'linear-gradient(to bottom, rgba(15,17,16,0.2) 0%, var(--color-bg) 100%)'
-          }} />
+          {/* Cinematic overlays */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(3,5,8,0.4) 0%, rgba(3,5,8,0.2) 40%, rgba(3,5,8,0.85) 85%, var(--color-bg) 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(3,5,8,0.6) 0%, transparent 50%, rgba(3,5,8,0.3) 100%)" }} />
         </div>
 
-        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <motion.div 
-            initial="hidden" 
-            animate="visible" 
+        {/* Content — Centered */}
+        <div className="container" style={{ position: "relative", zIndex: 10, textAlign: "center" }}>
+          <motion.div
+            initial="hidden"
+            animate="visible"
             variants={staggerContainer}
-            style={{ maxWidth: '800px' }}
+            style={{ maxWidth: "800px", margin: "0 auto" }}
           >
-            <motion.span variants={fadeInUp} style={{ 
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.4rem 1rem', 
-              background: 'rgba(16,112,176,0.15)', 
-              color: 'var(--color-primary)', 
-              borderRadius: 'var(--radius-full)',
-              fontWeight: 600,
-              fontSize: '0.9rem',
-              marginBottom: '1.5rem',
-              border: '1px solid var(--color-border-glow)'
-            }}>
-              <ShieldCheck size={16} /> Penyewaan Alat Gunung Terlengkap & Aman
+            <motion.span
+              variants={fadeInUp}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                padding: "0.4rem 1.2rem",
+                background: "rgba(0, 229, 255, 0.1)",
+                border: "1px solid rgba(0, 229, 255, 0.3)",
+                borderRadius: "var(--radius-full)",
+                color: "var(--color-primary)",
+                fontWeight: 600, fontSize: "0.85rem",
+                marginBottom: "2rem",
+                boxShadow: "0 0 25px rgba(0, 229, 255, 0.15)",
+              }}
+            >
+              <ShieldCheck size={15} /> Penyewaan Alat Outdoor Premium
             </motion.span>
-            
-            <motion.h1 variants={fadeInUp} style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
-              Petualangan Hebat <br />Mulai dari <span className="text-gradient-primary">Sini.</span>
+
+            <motion.h1
+              variants={fadeInUp}
+              style={{
+                fontSize: "clamp(3rem, 6vw, 5.5rem)",
+                letterSpacing: "-2px",
+                lineHeight: 1.05,
+                marginBottom: "1.5rem",
+                textShadow: "0 0 60px rgba(0,0,0,0.5)",
+              }}
+            >
+              Petualangan Dimulai <br />
+              <span className="text-gradient-primary" style={{ filter: "drop-shadow(0 0 25px rgba(0,229,255,0.4))" }}>
+                dari Sini.
+              </span>
             </motion.h1>
-            
-            <motion.p variants={fadeInUp} className="text-muted" style={{ fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '600px', lineHeight: 1.6 }}>
-              Koleksi terlengkap tenda, carrier, dan gear premium milik toko kami. Transaksi sewa dijamin aman, terawat, dan siap pakai.
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-muted"
+              style={{ fontSize: "1.2rem", marginBottom: "3rem", maxWidth: "550px", margin: "0 auto 3rem", lineHeight: 1.7 }}
+            >
+              Koleksi perlengkapan gunung terlengkap. Sewa mudah, ambil di toko, jaminan identitas. Siap temani setiap langkah Anda.
             </motion.p>
-            
-            <motion.div variants={fadeInUp} className="flex gap-sm">
+
+            <motion.div variants={fadeInUp} className="flex gap-sm justify-center">
               <Link href="/katalog">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
-                  Eksplor Katalog
+                <motion.button
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 35px rgba(0,229,255,0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn btn-primary"
+                  style={{ padding: "1rem 2.5rem", fontSize: "1.1rem", gap: "0.5rem" }}
+                >
+                  Eksplor Katalog <ArrowRight size={18} />
                 </motion.button>
               </Link>
               <Link href="/cara-kerja">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn glass" style={{ padding: '1rem 2rem', fontSize: '1.1rem', color: '#fff' }}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn btn-outline"
+                  style={{ padding: "1rem 2rem", fontSize: "1.1rem", backdropFilter: "blur(10px)", background: "rgba(255,255,255,0.05)" }}
+                >
                   Cara Kerja
                 </motion.button>
               </Link>
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Bottom scroll indicator */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          style={{ position: "absolute", bottom: "2rem", left: "50%", transform: "translateX(-50%)", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}
+        >
+          <span className="text-muted" style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "2px" }}>Scroll</span>
+          <div style={{ width: "1px", height: "30px", background: "linear-gradient(to bottom, var(--color-primary), transparent)" }} />
+        </motion.div>
       </section>
 
-      {/* FEATURED CATEGORIES & GEAR */}
-      <section className="container" style={{ padding: 'var(--space-xl) var(--space-sm)' }}>
-        <motion.div 
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          className="flex items-center justify-between" style={{ marginBottom: 'var(--space-md)' }}
-        >
-          <h2 style={{ fontSize: '2.5rem' }}>Gear <span className="text-muted">Terpopuler</span></h2>
-          <Link href="/katalog" className="text-gradient-primary" style={{ fontWeight: 600 }}>Lihat Semua &rarr;</Link>
-        </motion.div>
-
-        <motion.div 
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
+      {/* ═══════════════════════════════════════
+          FEATURED — Product Showcase Strip
+      ═══════════════════════════════════════ */}
+      <section className="container" style={{ padding: "var(--space-xl) var(--space-sm)", position: "relative", zIndex: 1 }}>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="grid grid-cols-3 gap-md"
         >
-          {/* Card 1 */}
-          <motion.div variants={fadeInUp} className="glass hover-lift" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', transition: 'transform 0.3s', boxShadow: 'var(--shadow-sm)' }}>
-            <div style={{ position: 'relative', height: '250px' }}>
-              <Image src="/images/gear_tent.png" alt="Tenda Premium 4-Season" fill unoptimized style={{ objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'var(--color-bg-glass)', padding: '0.4rem 1rem', borderRadius: 'var(--radius-full)', backdropFilter: 'blur(12px)', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Tent size={14} /> Tenda
-              </div>
+          {/* Section header */}
+          <motion.div variants={fadeInUp} className="flex items-center justify-between" style={{ marginBottom: "var(--space-lg)" }}>
+            <div>
+              <h2 style={{ fontSize: "2.5rem", marginBottom: "0.3rem", letterSpacing: "-1px" }}>
+                Gear <span className="text-gradient-primary">Terpopuler</span>
+              </h2>
+              <p className="text-muted" style={{ fontSize: "1rem" }}>Perlengkapan favorit yang paling sering disewa.</p>
             </div>
-            <div style={{ padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem' }}>Tenda Premium 4-Season</h3>
-              <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>Kapasitas 4 Orang, Anti Badai</p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-accent)' }}>Rp 120.000</span>
-                  <span className="text-muted" style={{ fontSize: '0.85rem' }}> /hari</span>
-                </div>
-                <Link href="/katalog">
-                  <button className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem', borderRadius: 'var(--radius-full)' }}>Sewa</button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Card 2 */}
-          <motion.div variants={fadeInUp} className="glass hover-lift" style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', transition: 'transform 0.3s', boxShadow: 'var(--shadow-sm)' }}>
-            <div style={{ position: 'relative', height: '250px' }}>
-              <Image src="/images/gear_backpack.png" alt="Carrier 60L Professional" fill unoptimized style={{ objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'var(--color-bg-glass)', padding: '0.4rem 1rem', borderRadius: 'var(--radius-full)', backdropFilter: 'blur(12px)', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Backpack size={14} /> Carrier
-              </div>
-            </div>
-            <div style={{ padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '0.5rem' }}>Carrier 60L Professional</h3>
-              <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>Sistem Backsystem Ergonomis</p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <span style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-accent)' }}>Rp 45.000</span>
-                  <span className="text-muted" style={{ fontSize: '0.85rem' }}> /hari</span>
-                </div>
-                <Link href="/katalog">
-                  <button className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem', borderRadius: 'var(--radius-full)' }}>Sewa</button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Card 3 */}
-          <motion.div variants={fadeInUp} className="glass flex flex-col items-center justify-center text-center hover-lift" style={{ borderRadius: 'var(--radius-md)', padding: '2rem', border: '1px dashed var(--color-primary)' }}>
-            <div style={{ width: '80px', height: '80px', background: 'rgba(16,112,176,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--color-primary)' }}>
-              <Compass size={40} />
-            </div>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>Temukan Lebih Banyak</h3>
-            <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '2rem' }}>Ratusan perlengkapan hiking & kemah siap menemani perjalanan Anda.</p>
-            <Link href="/katalog" style={{ width: '100%' }}>
-              <button className="btn btn-primary" style={{ width: '100%' }}>Eksplor Katalog</button>
+            <Link href="/katalog">
+              <motion.button
+                whileHover={{ scale: 1.05, x: 5 }}
+                className="btn btn-outline hide-on-mobile"
+                style={{ padding: "0.7rem 1.5rem", fontSize: "0.9rem", gap: "0.5rem" }}
+              >
+                Lihat Semua <ArrowRight size={16} />
+              </motion.button>
             </Link>
           </motion.div>
+
+          {/* Product grid — 4 cols asymmetric */}
+          <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1.3fr", gap: "1.5rem", alignItems: "stretch" }}>
+            {featuredProducts.map((product, i) => (
+              <motion.div
+                key={product.id}
+                variants={fadeInUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              >
+                <Link href={`/produk/${product.id}`} style={{ display: "block", height: "100%" }}>
+                  <div
+                    className="glass"
+                    style={{
+                      height: "100%",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      transition: "border-color 0.3s, box-shadow 0.3s",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)";
+                      e.currentTarget.style.boxShadow = "0 0 30px rgba(0,229,255,0.1), 0 20px 40px rgba(0,0,0,0.3)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
+                  >
+                    {/* Image */}
+                    <div style={{ position: "relative", height: i === 0 || i === 3 ? "280px" : "220px" }}>
+                      <Image src={product.image} alt={product.name} fill unoptimized style={{ objectFit: "cover" }} />
+                      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(3,5,8,0.95) 100%)" }} />
+                      {/* Category pill */}
+                      <div style={{
+                        position: "absolute", top: "1rem", right: "1rem",
+                        background: "rgba(3,5,8,0.6)", backdropFilter: "blur(10px)",
+                        padding: "0.35rem 0.8rem", borderRadius: "var(--radius-full)",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        fontSize: "0.75rem", fontWeight: 600, color: "#fff",
+                        display: "flex", alignItems: "center", gap: "0.3rem",
+                      }}>
+                        {product.category === "Tenda" && <Tent size={12} />}
+                        {product.category === "Carrier" && <Backpack size={12} />}
+                        {product.category !== "Tenda" && product.category !== "Carrier" && <Compass size={12} />}
+                        {product.category}
+                      </div>
+                    </div>
+                    {/* Content */}
+                    <div style={{ padding: "1.2rem 1.5rem", flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                      <h3 style={{ fontSize: "1.1rem", marginBottom: "0.8rem", lineHeight: 1.4, flexGrow: 1 }}>{product.name}</h3>
+                      <div className="flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "0.8rem" }}>
+                        <div>
+                          <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--color-primary)" }}>
+                            Rp {product.pricePerDay.toLocaleString("id-ID")}
+                          </span>
+                          <span className="text-muted" style={{ fontSize: "0.8rem" }}> /hr</span>
+                        </div>
+                        <div style={{
+                          width: "32px", height: "32px", borderRadius: "50%",
+                          background: "rgba(0,229,255,0.1)", border: "1px solid rgba(0,229,255,0.3)",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>
+                          <ArrowRight size={14} color="var(--color-primary)" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </section>
 
-      {/* HOW IT WORKS / ESCROW */}
-      <section style={{ position: 'relative', padding: 'var(--space-xl) 0', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'var(--color-bg-secondary)', zIndex: 0 }} />
-        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
+      {/* ═══════════════════════════════════════
+          HOW IT WORKS — Zigzag Mini
+      ═══════════════════════════════════════ */}
+      <section style={{ position: "relative", padding: "var(--space-xl) 0", overflow: "hidden" }}>
+        {/* Subtle background */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, var(--color-bg), rgba(0,229,255,0.02), var(--color-bg))", zIndex: 0 }} />
+
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center" style={{ marginBottom: 'var(--space-lg)' }}
+            className="text-center"
+            style={{ marginBottom: "var(--space-lg)" }}
           >
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Sistem Booking & <span className="text-gradient-primary">Pengambilan Mudah</span></h2>
-            <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.1rem' }}>
-              Sistem kami memudahkan Anda untuk menyewa perlengkapan dari toko kami. Booking dari rumah, ambil di toko dengan mudah.
+            <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem", letterSpacing: "-1px" }}>
+              Sewa Semudah <span className="text-gradient-primary">1-2-3</span>
+            </h2>
+            <p className="text-muted" style={{ maxWidth: "500px", margin: "0 auto", fontSize: "1.05rem" }}>
+              Proses yang simpel, aman, dan transparan dari awal hingga akhir.
             </p>
           </motion.div>
 
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid grid-cols-3 gap-md"
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "2rem", position: "relative" }}
           >
-            <motion.div variants={fadeInUp} className="glass text-center hover-lift" style={{ padding: '3rem 2rem', borderRadius: 'var(--radius-md)', borderTop: '4px solid var(--color-primary)' }}>
-              <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem', background: 'rgba(16,112,176,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)' }}>
-                <ShieldCheck size={40} />
-              </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>1. Booking & Bayar</h3>
-              <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-                Pilih barang di katalog, tentukan tanggal sewa, dan lakukan pembayaran DP/Lunas melalui platform dengan aman.
-              </p>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className="glass text-center hover-lift" style={{ padding: '3rem 2rem', borderRadius: 'var(--radius-md)', borderTop: '4px solid var(--color-accent)' }}>
-              <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem', background: 'rgba(255,107,53,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-accent)' }}>
-                <MapPin size={40} />
-              </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>2. Ambil & Tinggalkan KTP</h3>
-              <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-                Ambil alat di toko fisik kami dan tunjukkan bukti booking. Kami akan menahan identitas asli (KTP/SIM) Anda selama masa sewa sebagai jaminan.
+            {/* Connecting line */}
+            <div className="hide-on-mobile" style={{
+              position: "absolute", top: "60px", left: "16%", right: "16%", height: "1px",
+              background: "linear-gradient(90deg, transparent, rgba(0,229,255,0.3), rgba(255,85,0,0.3), rgba(74,222,128,0.3), transparent)",
+              zIndex: 0,
+            }} />
+
+            {/* Step 1 */}
+            <motion.div variants={fadeInUp} style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+              <motion.div
+                whileHover={{ scale: 1.1, boxShadow: "0 0 40px rgba(0,229,255,0.3)" }}
+                style={{
+                  width: "100px", height: "100px", margin: "0 auto 1.5rem",
+                  background: "rgba(0,229,255,0.08)", borderRadius: "var(--radius-lg)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid rgba(0,229,255,0.2)",
+                  boxShadow: "0 0 20px rgba(0,229,255,0.1)",
+                  transition: "all 0.3s",
+                }}
+              >
+                <ShieldCheck size={40} color="var(--color-primary)" strokeWidth={1.5} />
+              </motion.div>
+              <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--color-primary)", textTransform: "uppercase", letterSpacing: "2px" }}>Langkah 01</span>
+              <h3 style={{ fontSize: "1.2rem", margin: "0.5rem 0", color: "#fff" }}>Booking & Bayar</h3>
+              <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.6 }}>
+                Pilih alat, tentukan tanggal, dan bayar DP/Lunas secara online.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="glass text-center hover-lift" style={{ padding: '3rem 2rem', borderRadius: 'var(--radius-md)', borderTop: '4px solid #4ade80' }}>
-              <div style={{ width: '80px', height: '80px', margin: '0 auto 1.5rem', background: 'rgba(74,222,128,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4ade80' }}>
-                <Banknote size={40} />
-              </div>
-              <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>3. Kembalikan & Ambil KTP</h3>
-              <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-                Kembalikan alat tepat waktu tanpa kerusakan fisik, dan KTP/SIM Anda akan langsung kami kembalikan utuh.
+            {/* Step 2 */}
+            <motion.div variants={fadeInUp} style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+              <motion.div
+                whileHover={{ scale: 1.1, boxShadow: "0 0 40px rgba(255,85,0,0.3)" }}
+                style={{
+                  width: "100px", height: "100px", margin: "0 auto 1.5rem",
+                  background: "rgba(255,85,0,0.08)", borderRadius: "var(--radius-lg)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid rgba(255,85,0,0.2)",
+                  boxShadow: "0 0 20px rgba(255,85,0,0.1)",
+                  transition: "all 0.3s",
+                }}
+              >
+                <MapPin size={40} color="var(--color-accent)" strokeWidth={1.5} />
+              </motion.div>
+              <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--color-accent)", textTransform: "uppercase", letterSpacing: "2px" }}>Langkah 02</span>
+              <h3 style={{ fontSize: "1.2rem", margin: "0.5rem 0", color: "#fff" }}>Ambil & Titip KTP</h3>
+              <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.6 }}>
+                Datang ke toko, tunjukkan bukti, titipkan identitas sebagai jaminan.
               </p>
             </motion.div>
+
+            {/* Step 3 */}
+            <motion.div variants={fadeInUp} style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+              <motion.div
+                whileHover={{ scale: 1.1, boxShadow: "0 0 40px rgba(74,222,128,0.3)" }}
+                style={{
+                  width: "100px", height: "100px", margin: "0 auto 1.5rem",
+                  background: "rgba(74,222,128,0.08)", borderRadius: "var(--radius-lg)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid rgba(74,222,128,0.2)",
+                  boxShadow: "0 0 20px rgba(74,222,128,0.1)",
+                  transition: "all 0.3s",
+                }}
+              >
+                <Banknote size={40} color="#4ade80" strokeWidth={1.5} />
+              </motion.div>
+              <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "#4ade80", textTransform: "uppercase", letterSpacing: "2px" }}>Langkah 03</span>
+              <h3 style={{ fontSize: "1.2rem", margin: "0.5rem 0", color: "#fff" }}>Kembalikan & Ambil KTP</h3>
+              <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.6 }}>
+                Kembalikan alat, kami inspeksi, dan KTP Anda langsung kembali.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            style={{ textAlign: "center", marginTop: "var(--space-lg)" }}
+          >
+            <Link href="/cara-kerja">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn btn-outline"
+                style={{ padding: "0.8rem 2rem", fontSize: "1rem", gap: "0.5rem" }}
+              >
+                Pelajari Selengkapnya <ArrowRight size={16} />
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>

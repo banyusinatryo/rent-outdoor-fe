@@ -25,18 +25,24 @@ export default function Navbar() {
       transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
       style={{ 
         position: 'fixed', 
-        top: 0, 
-        width: '100%', 
+        top: isScrolled ? '1rem' : 0, 
+        left: 0,
+        right: 0,
+        margin: '0 auto',
+        width: isScrolled ? '95%' : '100%', 
+        maxWidth: '1200px',
         zIndex: 50, 
-        padding: isScrolled ? '0.8rem 0' : '1.5rem 0',
-        background: isScrolled ? 'rgba(15, 17, 16, 0.8)' : 'transparent',
-        backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-        WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-        borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid transparent',
-        transition: 'padding 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease'
+        padding: isScrolled ? '0.8rem 2rem' : '1.5rem 1rem',
+        background: isScrolled ? 'rgba(3, 5, 8, 0.75)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(24px)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(24px)' : 'none',
+        border: isScrolled ? '1px solid var(--color-border)' : '1px solid transparent',
+        borderRadius: isScrolled ? 'var(--radius-full)' : '0',
+        boxShadow: isScrolled ? 'var(--shadow-glow)' : 'none',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
       }} 
     >
-      <div className="container flex items-center justify-between">
+      <div className="flex items-center justify-between" style={{ width: '100%' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ position: 'relative', width: '130px', height: '40px' }}>
             <Image 

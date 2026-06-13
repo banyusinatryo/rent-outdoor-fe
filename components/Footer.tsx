@@ -2,8 +2,9 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid var(--color-border)', padding: 'var(--space-lg) 0', marginTop: 'var(--space-xl)', background: 'var(--color-bg-secondary)' }}>
-      <div className="container grid grid-cols-4 gap-lg">
+    <footer style={{ borderTop: '1px solid var(--color-border)', padding: 'var(--space-lg) 0', marginTop: 'var(--space-xl)', background: 'radial-gradient(ellipse at bottom, rgba(0, 229, 255, 0.05) 0%, var(--color-bg) 100%)', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '-1px', left: 0, width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--color-primary), transparent)' }} />
+      <div className="container grid grid-cols-4 gap-lg" style={{ position: 'relative', zIndex: 1 }}>
         <div>
           <h3 className="text-gradient-primary" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Nexus Outdoor.</h3>
           <p className="text-muted" style={{ fontSize: '0.9rem' }}>
