@@ -1,397 +1,210 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Backpack, ShieldCheck, MapPin } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, Mountain } from "lucide-react";
 
-const inputBaseStyle: React.CSSProperties = {
-  padding: "0.8rem",
-  borderRadius: "var(--radius-md)",
-  background: "rgba(3,5,8,0.8)",
-  border: "1px solid var(--color-border)",
+const inputBase: React.CSSProperties = {
+  padding: "0.85rem 1rem",
+  borderRadius: "12px",
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
   color: "#fff",
   outline: "none",
-  transition: "border 0.3s",
+  transition: "all 0.3s ease",
   width: "100%",
-  fontSize: "0.95rem",
+  fontSize: "0.9rem",
 };
 
-const inputFocusStyle: React.CSSProperties = {
-  border: "1px solid rgba(255,85,0,0.5)",
+const inputFocus: React.CSSProperties = {
+  borderColor: "rgba(255,85,0,0.5)",
   boxShadow: "0 0 15px rgba(255,85,0,0.15)",
+  background: "rgba(255,85,0,0.02)",
 };
-
-function GlowInput({
-  label,
-  type = "text",
-  placeholder,
-  required = true,
-}: {
-  label: string;
-  type?: string;
-  placeholder: string;
-  required?: boolean;
-}) {
-  const [focused, setFocused] = useState(false);
-
-  return (
-    <div className="flex flex-col gap-xs">
-      <label className="text-muted" style={{ fontSize: "0.9rem" }}>
-        {label}
-      </label>
-      <input
-        required={required}
-        type={type}
-        placeholder={placeholder}
-        style={{
-          ...inputBaseStyle,
-          ...(focused ? inputFocusStyle : {}),
-        }}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      />
-    </div>
-  );
-}
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-const fadeLeft = {
-  hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
-};
-
-const floatingCards = [
-  {
-    icon: Backpack,
-    label: "Peralatan Lengkap",
-    delay: 0,
-    top: "12%",
-    right: "8%",
-    rotate: -4,
-  },
-  {
-    icon: ShieldCheck,
-    label: "Terjamin Aman",
-    delay: 0.8,
-    top: "42%",
-    right: "22%",
-    rotate: 3,
-  },
-  {
-    icon: MapPin,
-    label: "Jelajahi Alam",
-    delay: 1.6,
-    top: "70%",
-    right: "6%",
-    rotate: -2,
-  },
-];
 
 export default function Register() {
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Pendaftaran berhasil!");
+    alert("Proses pendaftaran akan segera diimplementasikan dengan Laravel Sanctum!");
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        paddingTop: "100px",
-        paddingBottom: "var(--space-xl)",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* ── Neon Blobs ── */}
-      <div
-        className="animate-blob"
-        style={{
-          position: "absolute",
-          width: 420,
-          height: 420,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,85,0,0.18) 0%, transparent 70%)",
-          top: "-5%",
-          right: "10%",
-          filter: "blur(80px)",
-          zIndex: 0,
-        }}
-      />
-      <div
-        className="animate-blob"
-        style={{
-          position: "absolute",
-          width: 340,
-          height: 340,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%)",
-          bottom: "5%",
-          left: "5%",
-          filter: "blur(90px)",
-          zIndex: 0,
-          animationDelay: "2s",
-        }}
-      />
-      <div
-        className="animate-blob"
-        style={{
-          position: "absolute",
-          width: 260,
-          height: 260,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,85,0,0.1) 0%, transparent 70%)",
-          bottom: "25%",
-          right: "35%",
-          filter: "blur(70px)",
-          zIndex: 0,
-          animationDelay: "4s",
-        }}
-      />
+    <div style={{ 
+      minHeight: "100vh", 
+      display: "flex", 
+      alignItems: "center", 
+      justifyContent: "center", 
+      background: "var(--color-bg)", 
+      position: "relative",
+      overflow: "hidden",
+      padding: "2rem"
+    }}>
+      
+      {/* ── Background Ambient Glow (Flipped from Login) ── */}
+      <div style={{ position: "absolute", top: "-10%", right: "-5%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(255,85,0,0.12) 0%, transparent 60%)", filter: "blur(80px)", borderRadius: "50%", zIndex: 0 }} />
+      <div style={{ position: "absolute", bottom: "-10%", left: "-5%", width: "600px", height: "600px", background: "radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 60%)", filter: "blur(90px)", borderRadius: "50%", zIndex: 0 }} />
 
-      {/* ── Split Layout ── */}
-      <div
-        className="container"
+      {/* ══════════════════════════════════════════════
+          PREMIUM CENTERED GLASS CARD (Mirrored Layout)
+         ══════════════════════════════════════════════ */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1.2fr",
-          gap: "var(--space-xl)",
-          alignItems: "center",
-          minHeight: "calc(100vh - 100px)",
+          display: "flex",
+          width: "100%",
+          maxWidth: "1000px",
+          minHeight: "550px",
+          background: "rgba(10, 14, 20, 0.4)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          borderRadius: "24px",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,85,0,0.05)",
+          overflow: "hidden",
           position: "relative",
-          zIndex: 1,
+          zIndex: 10
         }}
       >
-        {/* ── LEFT: Registration Form ── */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{ position: "relative", zIndex: 2 }}
-        >
-          <motion.div
-            variants={fadeUp}
-            className="glass"
-            style={{
-              padding: "2.5rem",
-              borderRadius: "var(--radius-lg)",
-              position: "relative",
-              overflow: "hidden",
-              boxShadow: "0 0 40px rgba(255,85,0,0.06), 0 8px 32px rgba(0,0,0,0.4)",
-            }}
-          >
-            {/* Orange glowing top border */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: "10%",
-                right: "10%",
-                height: "2px",
-                background:
-                  "linear-gradient(90deg, transparent, var(--color-accent), transparent)",
-                borderRadius: "999px",
-                boxShadow: "0 0 20px rgba(255,85,0,0.5)",
-              }}
-            />
+        
+        {/* LEFT SIDE — Clean Register Form */}
+        <div style={{ flex: "1.1", padding: "3rem 3.5rem", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", background: "rgba(6, 9, 13, 0.6)" }}>
+          
+          {/* Subtle top edge highlight */}
+          <div style={{ position: "absolute", top: 0, left: "10%", right: "10%", height: "1px", background: "linear-gradient(90deg, transparent, rgba(255,85,0,0.3), transparent)" }} />
 
-            {/* Header */}
-            <motion.div variants={fadeUp} style={{ marginBottom: "2rem" }}>
-              <h1
-                style={{
-                  fontSize: "2rem",
-                  fontWeight: 700,
-                  marginBottom: "0.5rem",
-                  color: "var(--color-text)",
-                }}
-              >
-                Daftar Akun Baru
-              </h1>
-              <p className="text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.6 }}>
-                Mulai petualangan Anda bersama Nexus Outdoor.
-              </p>
-            </motion.div>
-
-            {/* Form */}
-            <motion.form
-              variants={fadeUp}
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-sm"
-            >
-              <GlowInput label="Nama Lengkap" type="text" placeholder="John Doe" />
-              <GlowInput label="Email" type="email" placeholder="email@contoh.com" />
-              <div style={{ marginBottom: "0.5rem" }}>
-                <GlowInput label="Password" type="password" placeholder="••••••••" />
+          <div style={{ marginBottom: "2rem" }}>
+            <Link href="/" style={{ display: "inline-block", marginBottom: "1.5rem" }}>
+              <div style={{ position: "relative", width: "110px", height: "30px" }}>
+                <Image src="/images/nexus logo.png" alt="Nexus Logo" fill style={{ objectFit: "contain", objectPosition: "left" }} />
               </div>
+            </Link>
+            <h1 style={{ fontSize: "1.8rem", fontWeight: 700, color: "#fff", marginBottom: "0.4rem" }}>Buat Akun</h1>
+            <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.5)" }}>Mulai petualangan Anda bersama Nexus Outdoor.</p>
+          </div>
 
-              <motion.button
-                variants={fadeUp}
-                type="submit"
-                className="btn btn-accent"
-                whileHover={{ scale: 1.02, boxShadow: "0 0 25px rgba(255,85,0,0.35)" }}
-                whileTap={{ scale: 0.98 }}
-                style={{
-                  width: "100%",
-                  padding: "0.85rem",
-                  fontSize: "1rem",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  border: "none",
-                  marginTop: "0.5rem",
-                }}
-              >
-                Buat Akun
-              </motion.button>
-            </motion.form>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
+            
+            {/* Nama Lengkap */}
+            <div>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
+                Nama Lengkap
+              </label>
+              <input
+                required
+                type="text"
+                placeholder="John Doe"
+                onFocus={() => setFocusedField("name")}
+                onBlur={() => setFocusedField(null)}
+                style={{ ...inputBase, ...(focusedField === "name" ? inputFocus : {}) }}
+              />
+            </div>
 
-            {/* Footer Link */}
-            <motion.div
-              variants={fadeUp}
+            {/* Email */}
+            <div>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
+                Email
+              </label>
+              <input
+                required
+                type="email"
+                placeholder="nama@email.com"
+                onFocus={() => setFocusedField("email")}
+                onBlur={() => setFocusedField(null)}
+                style={{ ...inputBase, ...(focusedField === "email" ? inputFocus : {}) }}
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
+                Password
+              </label>
+              <input
+                required
+                type="password"
+                placeholder="Minimal 8 karakter"
+                onFocus={() => setFocusedField("password")}
+                onBlur={() => setFocusedField(null)}
+                style={{ ...inputBase, ...(focusedField === "password" ? inputFocus : {}) }}
+              />
+            </div>
+
+            {/* Submit Button */}
+            <motion.button
+              whileHover={{ scale: 1.01, boxShadow: "0 5px 15px rgba(255,85,0,0.2)" }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
               style={{
-                marginTop: "2rem",
-                borderTop: "1px solid var(--color-border)",
-                paddingTop: "1.5rem",
-                textAlign: "center",
+                width: "100%",
+                padding: "0.9rem",
+                borderRadius: "12px",
+                background: "var(--color-accent)", // Orange
+                color: "#000",
+                fontSize: "0.95rem",
+                fontWeight: 700,
+                border: "none",
+                cursor: "pointer",
+                marginTop: "0.5rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "0.5rem"
               }}
             >
-              <p className="text-muted" style={{ fontSize: "0.9rem" }}>
-                Sudah punya akun?{" "}
-                <Link
-                  href="/login"
-                  className="text-gradient-primary"
-                  style={{ fontWeight: 600 }}
-                >
-                  Login di sini
-                </Link>
+              Daftar Sekarang <ArrowRight size={16} />
+            </motion.button>
+          </form>
+
+          {/* Login Link */}
+          <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
+            <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.5)" }}>
+              Sudah punya akun?{" "}
+              <Link href="/login" style={{ color: "#fff", fontWeight: 600, textDecoration: "none" }}>
+                Log In di sini
+              </Link>
+            </p>
+          </div>
+
+        </div>
+
+        {/* RIGHT SIDE — High Quality Image Panel */}
+        <div className="hide-on-mobile" style={{ flex: "1", position: "relative" }}>
+          <Image 
+            src="/images/hero_camping.png" 
+            alt="Camping and Hiking" 
+            fill 
+            style={{ objectFit: "cover", objectPosition: "center" }} 
+            priority
+          />
+          {/* Gradient Overlay for text readability */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(3,5,8,0.95) 0%, rgba(3,5,8,0.2) 50%, transparent 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to left, rgba(255,85,0,0.1) 0%, transparent 100%)" }} />
+          
+          {/* Copy overlay */}
+          <div style={{ position: "absolute", inset: "0", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2.5rem" }}>
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5, duration: 0.8 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.3rem 0.8rem", background: "rgba(255,255,255,0.1)", backdropFilter: "blur(10px)", borderRadius: "100px", border: "1px solid rgba(255,255,255,0.2)", marginBottom: "1rem" }}>
+                <Mountain size={14} color="#FF5500" />
+                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#fff", letterSpacing: "0.5px" }}>BERGABUNG BERSAMA KAMI</span>
+              </div>
+              <h2 style={{ fontSize: "2rem", fontWeight: 700, lineHeight: 1.2, color: "#fff", marginBottom: "0.5rem" }}>
+                Jadilah Bagian Dari<br/>Komunitas Kami.
+              </h2>
+              <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9rem", maxWidth: "280px" }}>
+                Lebih dari sekadar menyewa. Dapatkan poin reward dan akses prioritas ke alat terbaru.
               </p>
             </motion.div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        {/* ── RIGHT: Decorative Area ── */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{ position: "relative", minHeight: 500 }}
-        >
-          {/* Main Text */}
-          <motion.div variants={fadeLeft} style={{ marginBottom: "1.5rem" }}>
-            <h2
-              className="text-gradient-primary"
-              style={{
-                fontSize: "3rem",
-                fontWeight: 800,
-                lineHeight: 1.15,
-                marginBottom: "1rem",
-              }}
-            >
-              Mulai Petualangan
-              <br />
-              Baru
-            </h2>
-            <p
-              className="text-muted"
-              style={{ fontSize: "1.05rem", lineHeight: 1.7, maxWidth: 420 }}
-            >
-              Bergabunglah dengan komunitas penjelajah alam. Akses ratusan peralatan
-              outdoor premium, rencanakan perjalanan, dan ciptakan pengalaman yang tak
-              terlupakan bersama Nexus Outdoor.
-            </p>
-          </motion.div>
+      </motion.div>
 
-          {/* Floating Decorative Cards */}
-          {floatingCards.map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.7, rotate: card.rotate * 2 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                rotate: card.rotate,
-                y: [0, -15, 0],
-              }}
-              transition={{
-                opacity: { duration: 0.6, delay: 0.4 + i * 0.2 },
-                scale: { duration: 0.6, delay: 0.4 + i * 0.2 },
-                rotate: { duration: 0.6, delay: 0.4 + i * 0.2 },
-                y: {
-                  duration: 3.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: card.delay,
-                },
-              }}
-              className="glass"
-              style={{
-                position: "absolute",
-                top: card.top,
-                right: card.right,
-                padding: "1.2rem 1.6rem",
-                borderRadius: "var(--radius-md)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-                boxShadow:
-                  i === 0
-                    ? "0 0 20px rgba(255,85,0,0.12), 0 4px 20px rgba(0,0,0,0.3)"
-                    : i === 1
-                    ? "0 0 20px rgba(0,229,255,0.12), 0 4px 20px rgba(0,0,0,0.3)"
-                    : "0 0 20px rgba(255,85,0,0.08), 0 4px 20px rgba(0,0,0,0.3)",
-                zIndex: 3 - i,
-                backdropFilter: "blur(14px)",
-              }}
-            >
-              <card.icon
-                size={22}
-                style={{
-                  color: i === 1 ? "var(--color-primary)" : "var(--color-accent)",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "0.9rem",
-                  fontWeight: 500,
-                  color: "var(--color-text)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {card.label}
-              </span>
-            </motion.div>
-          ))}
-
-          {/* Accent line decoration */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            style={{
-              position: "absolute",
-              bottom: "15%",
-              left: 0,
-              width: "60%",
-              height: "1px",
-              background:
-                "linear-gradient(90deg, var(--color-accent), transparent)",
-              transformOrigin: "left",
-              opacity: 0.4,
-            }}
-          />
-        </motion.div>
-      </div>
     </div>
   );
 }
