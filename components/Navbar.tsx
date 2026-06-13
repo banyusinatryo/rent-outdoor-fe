@@ -29,10 +29,10 @@ export default function Navbar() {
         left: 0,
         right: 0,
         margin: '0 auto',
-        width: isScrolled ? '95%' : '100%', 
-        maxWidth: '1200px',
+        width: '100%', 
+        maxWidth: isScrolled ? '850px' : '1200px',
         zIndex: 50, 
-        padding: isScrolled ? '0.8rem 2rem' : '1.5rem 1rem',
+        padding: isScrolled ? '0.8rem 2.5rem' : '1.5rem 1rem',
         background: isScrolled ? 'rgba(3, 5, 8, 0.75)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(24px)' : 'none',
         WebkitBackdropFilter: isScrolled ? 'blur(24px)' : 'none',
@@ -44,7 +44,7 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between" style={{ width: '100%' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ position: 'relative', width: '130px', height: '40px' }}>
+          <div style={{ position: 'relative', width: '130px', height: '40px', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
             <Image 
               src="/images/nexus logo.png" 
               alt="Nexus Outdoor" 
@@ -56,17 +56,17 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="flex items-center gap-md hide-on-mobile" style={{ fontWeight: 500 }}>
+        <div className="flex items-center hide-on-mobile" style={{ fontWeight: 500, gap: '2rem', fontSize: '1rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
           <Link href="/katalog" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Katalog</Link>
           <Link href="/cara-kerja" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Cara Kerja</Link>
           <Link href="/tentang" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Tentang</Link>
         </div>
 
-        <div className="flex items-center gap-sm hide-on-mobile">
-          <Link href="/login" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem' }}>
+        <div className="flex items-center hide-on-mobile" style={{ gap: '1rem' }}>
+          <Link href="/login" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
             Log In
           </Link>
-          <Link href="/register" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem' }}>
+          <Link href="/register" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
             Mulai Sewa
           </Link>
         </div>

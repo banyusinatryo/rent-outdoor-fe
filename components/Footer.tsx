@@ -34,9 +34,10 @@ export default function Footer() {
 
         <div>
           <h4 style={{ marginBottom: '1rem', color: '#fff' }}>Alamat Toko</h4>
-          <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>
-            Jl. Pendaki Gunung No. 123, Bandung, Jawa Barat.
+          <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem', lineHeight: 1.6 }}>
+            Kp. Kademagan Rt 02 Rw 03 No.52, Kel. Kademangan, Kec. Setu, Kota Tangerang Selatan, Banten 15343.
           </p>
+
           <Link href="/katalog" className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
             Lihat Katalog
           </Link>

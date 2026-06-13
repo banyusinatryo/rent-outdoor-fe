@@ -42,7 +42,7 @@ export default function Katalog() {
   });
 
   return (
-    <div className="container" style={{ paddingTop: '100px', paddingBottom: 'var(--space-xl)', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ paddingTop: '100px', paddingBottom: 'var(--space-xl)', paddingLeft: '5%', paddingRight: '5%', position: 'relative', overflow: 'hidden', minHeight: '100vh' }}>
 
       {/* ── Neon Blob Backgrounds ── */}
       <div style={{
@@ -215,8 +215,14 @@ export default function Katalog() {
         variants={staggerContainer}
         initial="hidden"
         animate="show"
-        className="grid grid-cols-3 gap-md"
-        style={{ position: 'relative', zIndex: 1, minHeight: '500px' }}
+        style={{ 
+          position: 'relative', 
+          zIndex: 1, 
+          minHeight: '500px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: 'var(--space-lg)'
+        }}
       >
         <AnimatePresence mode='popLayout'>
           {filteredProducts.map((product) => (

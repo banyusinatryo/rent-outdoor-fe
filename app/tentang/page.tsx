@@ -37,8 +37,8 @@ export default function Tentang() {
       iconColor: "#4ade80",
       iconBg: "rgba(74, 222, 128, 0.1)",
       borderTop: "linear-gradient(90deg, transparent, #4ade80, transparent)",
-      title: "Keberlanjutan (Eco-Friendly)",
-      description: "Dengan menyewa daripada membeli, kita mengurangi limbah konsumsi dan jejak karbon. Satu tenda bisa membahagiakan puluhan orang berbeda.",
+      title: "Peduli Lingkungan",
+      description: "Menyewa perlengkapan berarti mengurangi produksi limbah baru. Satu tenda yang dirawat dengan baik bisa menemani puluhan perjalanan berbeda tanpa membebani alam.",
       offsetY: -20,
     },
     {
@@ -46,8 +46,8 @@ export default function Tentang() {
       iconColor: "var(--color-primary)",
       iconBg: "rgba(0, 229, 255, 0.1)",
       borderTop: "linear-gradient(90deg, transparent, var(--color-primary), transparent)",
-      title: "Keamanan Transaksi",
-      description: "Sistem penahanan identitas asli kami memastikan keamanan alat terjaga dengan baik, memberikan kedamaian pikiran baik bagi toko maupun penyewa.",
+      title: "Keamanan Terjamin",
+      description: "Sistem jaminan identitas kami rancang agar semua pihak merasa tenang. Alat toko tetap aman, dan Anda bisa menikmati petualangan tanpa rasa khawatir.",
       offsetY: 0,
     },
     {
@@ -55,8 +55,8 @@ export default function Tentang() {
       iconColor: "var(--color-accent)",
       iconBg: "rgba(255, 85, 0, 0.1)",
       borderTop: "linear-gradient(90deg, transparent, var(--color-accent), transparent)",
-      title: "Semangat Eksplorasi",
-      description: "Kami meruntuhkan tembok biaya agar mahasiswa, pekerja, dan siapapun bisa merasakan tenangnya tidur di bawah taburan bintang di puncak gunung.",
+      title: "Eksplorasi Tanpa Batas",
+      description: "Biaya tidak boleh jadi halangan untuk menikmati alam. Kami hadir agar siapa pun bisa merasakan syahdunya tidur di bawah taburan bintang di puncak gunung.",
       offsetY: -20,
     },
   ];
@@ -222,7 +222,7 @@ export default function Tentang() {
               <div style={{ padding: "10px", height: "100%" }}>
                 <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "calc(var(--radius-lg) - 6px)", overflow: "hidden" }}>
                   <Image
-                    src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80"
+                    src="/images/gunung-terindah-di-indonesia-7.jpg"
                     alt="Hikers on mountain trail"
                     fill
                     unoptimized
@@ -262,7 +262,7 @@ export default function Tentang() {
               <div style={{ padding: "8px", height: "100%" }}>
                 <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "calc(var(--radius-lg) - 4px)", overflow: "hidden" }}>
                   <Image
-                    src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80"
+                    src="/images/IMG_4440.jpg"
                     alt="Mountain adventure"
                     fill
                     unoptimized
