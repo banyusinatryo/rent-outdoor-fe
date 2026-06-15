@@ -4,7 +4,10 @@
  * Semua fetching ke backend Laravel harus melalui helper ini.
  */
 
-export const BASE_URL = "https://admin-nexus.codiroom.tech/api/v1";
+// Base URL diambil dari environment variable.
+// Set NEXT_PUBLIC_API_URL di file .env.local (lokal) atau environment hosting.
+export const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ?? "https://admin-nexus.codiroom.tech/api/v1";
 
 // ─── Core Fetch Helper ────────────────────────────────────────────────────────
 
