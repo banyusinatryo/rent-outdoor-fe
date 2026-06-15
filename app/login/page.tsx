@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, Mountain } from "lucide-react";
+import { ArrowRight, Mountain, Loader2 } from "lucide-react";
+import { loginCustomer } from "@/lib/api";
+import { setAuth } from "@/lib/auth";
 
 const inputBase: React.CSSProperties = {
   padding: "0.85rem 1rem",
@@ -25,11 +28,32 @@ const inputFocus: React.CSSProperties = {
 };
 
 export default function Login() {
+  const router = useRouter();
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [email, setEmail]               = useState('');
+  const [password, setPassword]         = useState('');
+  const [loading, setLoading]           = useState(false);
+  const [apiError, setApiError]         = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Proses login akan segera diimplementasikan dengan Laravel Sanctum!");
+    setLoading(true);
+    setApiError(null);
+
+    try {
+      const res = await loginCustomer({ email, password });
+      setAuth(res.data.token, res.data.customer);
+      router.push('/');
+    } catch (err: unknown) {
+      const apiErr = err as { message?: string; errors?: Record<string, string[]> };
+      setApiError(
+        apiErr?.errors?.email?.[0] ??
+        apiErr?.message ??
+        'Login gagal. Periksa email dan password Anda.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -120,6 +144,13 @@ export default function Login() {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+            {/* Error Message */}
+            {apiError && (
+              <div style={{ padding: '0.85rem 1rem', borderRadius: '10px', background: 'rgba(248,113,113,0.1)', border: '1px solid rgba(248,113,113,0.3)', color: '#f87171', fontSize: '0.85rem' }}>
+                {apiError}
+              </div>
+            )}
+
             {/* Email */}
             <div>
               <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.5rem" }}>
@@ -129,6 +160,8 @@ export default function Login() {
                 required
                 type="email"
                 placeholder="nama@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 onFocus={() => setFocusedField("email")}
                 onBlur={() => setFocusedField(null)}
                 style={{ ...inputBase, ...(focusedField === "email" ? inputFocus : {}) }}
@@ -141,14 +174,13 @@ export default function Login() {
                 <label style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>
                   Password
                 </label>
-                <Link href="#" style={{ fontSize: "0.75rem", color: "var(--color-primary)", textDecoration: "none" }}>
-                  Lupa password?
-                </Link>
               </div>
               <input
                 required
                 type="password"
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 onFocus={() => setFocusedField("password")}
                 onBlur={() => setFocusedField(null)}
                 style={{ ...inputBase, ...(focusedField === "password" ? inputFocus : {}) }}
@@ -157,19 +189,20 @@ export default function Login() {
 
             {/* Submit Button */}
             <motion.button
-              whileHover={{ scale: 1.01, boxShadow: "0 5px 15px rgba(0,229,255,0.2)" }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={!loading ? { scale: 1.01, boxShadow: "0 5px 15px rgba(0,229,255,0.2)" } : {}}
+              whileTap={!loading ? { scale: 0.98 } : {}}
               type="submit"
+              disabled={loading}
               style={{
                 width: "100%",
                 padding: "0.9rem",
                 borderRadius: "12px",
-                background: "var(--color-primary)",
+                background: loading ? "rgba(0,229,255,0.5)" : "var(--color-primary)",
                 color: "#000",
                 fontSize: "0.95rem",
                 fontWeight: 600,
                 border: "none",
-                cursor: "pointer",
+                cursor: loading ? 'not-allowed' : 'pointer',
                 marginTop: "1rem",
                 display: "flex",
                 justifyContent: "center",
@@ -177,7 +210,7 @@ export default function Login() {
                 gap: "0.5rem"
               }}
             >
-              Masuk Akun <ArrowRight size={16} />
+              {loading ? <><Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Masuk...</> : <>Masuk Akun <ArrowRight size={16} /></>}
             </motion.button>
           </form>
 

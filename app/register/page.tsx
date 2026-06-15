@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, Mountain } from "lucide-react";
+import { ArrowRight, Mountain, Loader2 } from "lucide-react";
+import { registerCustomer } from "@/lib/api";
+import { setAuth } from "@/lib/auth";
 
 const inputBase: React.CSSProperties = {
   padding: "0.85rem 1rem",
@@ -25,11 +28,42 @@ const inputFocus: React.CSSProperties = {
 };
 
 export default function Register() {
+  const router = useRouter();
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [name, setName]         = useState('');
+  const [email, setEmail]       = useState('');
+  const [phone, setPhone]       = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm]   = useState('');
+  const [loading, setLoading]   = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Proses pendaftaran akan segera diimplementasikan dengan Laravel Sanctum!");
+    if (password !== confirm) {
+      setApiError('Password dan konfirmasi password tidak sama.');
+      return;
+    }
+    setLoading(true);
+    setApiError(null);
+
+    try {
+      const res = await registerCustomer({
+        name, email, phone,
+        password,
+        password_confirmation: confirm,
+      });
+      setAuth(res.data.token, res.data.customer);
+      router.push('/');
+    } catch (err: unknown) {
+      const apiErr = err as { message?: string; errors?: Record<string, string[]> };
+      const firstError = apiErr?.errors
+        ? Object.values(apiErr.errors)[0]?.[0]
+        : null;
+      setApiError(firstError ?? apiErr?.message ?? 'Pendaftaran gagal. Coba lagi.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,7 +123,13 @@ export default function Register() {
           </div>
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
-            
+            {/* Error */}
+            {apiError && (
+              <div style={{ padding: '0.85rem 1rem', borderRadius: '10px', background: 'rgba(248,113,113,0.1)', border: '1px solid rgba(248,113,113,0.3)', color: '#f87171', fontSize: '0.85rem' }}>
+                {apiError}
+              </div>
+            )}
+
             {/* Nama Lengkap */}
             <div>
               <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
@@ -99,6 +139,8 @@ export default function Register() {
                 required
                 type="text"
                 placeholder="John Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 onFocus={() => setFocusedField("name")}
                 onBlur={() => setFocusedField(null)}
                 style={{ ...inputBase, ...(focusedField === "name" ? inputFocus : {}) }}
@@ -114,9 +156,28 @@ export default function Register() {
                 required
                 type="email"
                 placeholder="nama@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 onFocus={() => setFocusedField("email")}
                 onBlur={() => setFocusedField(null)}
                 style={{ ...inputBase, ...(focusedField === "email" ? inputFocus : {}) }}
+              />
+            </div>
+
+            {/* No. HP */}
+            <div>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
+                Nomor WhatsApp
+              </label>
+              <input
+                required
+                type="tel"
+                placeholder="081234567890"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                onFocus={() => setFocusedField("phone")}
+                onBlur={() => setFocusedField(null)}
+                style={{ ...inputBase, ...(focusedField === "phone" ? inputFocus : {}) }}
               />
             </div>
 
@@ -128,28 +189,48 @@ export default function Register() {
               <input
                 required
                 type="password"
-                placeholder="Minimal 8 karakter"
+                placeholder="Minimal 6 karakter"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 onFocus={() => setFocusedField("password")}
                 onBlur={() => setFocusedField(null)}
                 style={{ ...inputBase, ...(focusedField === "password" ? inputFocus : {}) }}
               />
             </div>
 
+            {/* Konfirmasi Password */}
+            <div>
+              <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
+                Konfirmasi Password
+              </label>
+              <input
+                required
+                type="password"
+                placeholder="Ulangi password"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                onFocus={() => setFocusedField("confirm")}
+                onBlur={() => setFocusedField(null)}
+                style={{ ...inputBase, ...(focusedField === "confirm" ? inputFocus : {}) }}
+              />
+            </div>
+
             {/* Submit Button */}
             <motion.button
-              whileHover={{ scale: 1.01, boxShadow: "0 5px 15px rgba(255,85,0,0.2)" }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={!loading ? { scale: 1.01, boxShadow: "0 5px 15px rgba(255,85,0,0.2)" } : {}}
+              whileTap={!loading ? { scale: 0.98 } : {}}
               type="submit"
+              disabled={loading}
               style={{
                 width: "100%",
                 padding: "0.9rem",
                 borderRadius: "12px",
-                background: "var(--color-accent)", // Orange
-                color: "#000",
+                background: loading ? "rgba(255,85,0,0.5)" : "var(--color-accent)",
+                color: "#fff",
                 fontSize: "0.95rem",
                 fontWeight: 700,
                 border: "none",
-                cursor: "pointer",
+                cursor: loading ? 'not-allowed' : 'pointer',
                 marginTop: "0.5rem",
                 display: "flex",
                 justifyContent: "center",
@@ -157,7 +238,7 @@ export default function Register() {
                 gap: "0.5rem"
               }}
             >
-              Daftar Sekarang <ArrowRight size={16} />
+              {loading ? <><Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} /> Mendaftar...</> : <>Daftar Sekarang <ArrowRight size={16} /></>}
             </motion.button>
           </form>
 

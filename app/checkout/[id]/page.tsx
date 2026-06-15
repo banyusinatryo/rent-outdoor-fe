@@ -5,53 +5,110 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { mockProducts } from '@/data/mockProducts';
+import { Loader2, AlertCircle, LogIn } from 'lucide-react';
+import { getProduct, createBooking } from '@/lib/api';
+import { getProductImage, calculateRentalPrice, type ApiProduct } from '@/lib/types';
+import { isLoggedIn } from '@/lib/auth';
 
 export default function CheckoutPage() {
-  const params = useParams();
+  const params       = useParams();
   const searchParams = useSearchParams();
-  const router = useRouter();
-  
-  const id = params?.id as string;
-  const product = mockProducts.find(p => p.id === id);
-  
-  const startParam = searchParams?.get('start');
-  const endParam = searchParams?.get('end');
-  
-  const [name, setName] = useState('');
-  const [wa, setWa] = useState('');
-  const [days, setDays] = useState(0);
-  
-  useEffect(() => {
-    if (startParam && endParam) {
-      const start = new Date(startParam);
-      const end = new Date(endParam);
-      const diffTime = Math.abs(end.getTime() - start.getTime());
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-      setDays(diffDays > 0 ? diffDays : 0);
-    }
-  }, [startParam, endParam]);
+  const router       = useRouter();
 
-  if (!product || !startParam || !endParam) {
+  const id        = Number(params?.id);
+  const startDate = searchParams?.get('start') ?? '';
+  const endDate   = searchParams?.get('end') ?? '';
+  const unitId    = Number(searchParams?.get('unit_id'));
+  const days      = Number(searchParams?.get('days')) || 0;
+
+  // ── State ────────────────────────────────────────────────────────────────
+  const [product, setProduct]     = useState<ApiProduct | null>(null);
+  const [loadingProd, setLoadingProd] = useState(true);
+  const [name, setName]           = useState('');
+  const [wa, setWa]               = useState('');
+  const [notes, setNotes]         = useState('');
+  const [loading, setLoading]     = useState(false);
+  const [notLoggedIn, setNotLoggedIn] = useState(false);
+
+  // ── Cek login & fetch produk ──────────────────────────────────────────────
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      setNotLoggedIn(true);
+      return;
+    }
+    if (!id) return;
+
+    setLoadingProd(true);
+    getProduct(id)
+      .then((res) => setProduct(res.data))
+      .catch(() => toast.error('Gagal memuat data produk.'))
+      .finally(() => setLoadingProd(false));
+  }, [id]);
+
+  // ── Validasi param URL ────────────────────────────────────────────────────
+  const isInvalid = !startDate || !endDate || !unitId || days <= 0;
+
+  // ── Hitung harga ──────────────────────────────────────────────────────────
+  const rentalTotal = product ? calculateRentalPrice(product, days) : 0;
+
+  // ── Handler booking ───────────────────────────────────────────────────────
+  const handleBooking = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !wa.trim()) {
+      toast.error('Mohon lengkapi nama dan nomor WhatsApp');
+      return;
+    }
+    if (!product || !unitId) return;
+
+    setLoading(true);
+    try {
+      const res = await createBooking({
+        start_date: startDate,
+        end_date: endDate,
+        items: [{ inventory_unit_id: unitId, rental_days: days }],
+        notes: notes.trim() || undefined,
+      });
+
+      toast.success('Booking berhasil dibuat!');
+      // Redirect ke halaman payment dengan rental ID dari API
+      router.push(`/payment/${res.data.id}?start=${startDate}&end=${endDate}`);
+    } catch (err: unknown) {
+      const apiErr = err as { message?: string };
+      toast.error(apiErr?.message ?? 'Booking gagal. Coba lagi.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ── Not logged in state ───────────────────────────────────────────────────
+  if (notLoggedIn) {
     return (
       <div className="container" style={{ paddingTop: '150px', textAlign: 'center' }}>
-        <h2>Pesanan Tidak Valid</h2>
-        <Link href="/katalog" className="text-gradient-primary">Kembali ke Katalog</Link>
+        <LogIn size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1rem' }} />
+        <h2 style={{ marginBottom: '1rem' }}>Login Diperlukan</h2>
+        <p className="text-muted" style={{ marginBottom: '2rem' }}>
+          Kamu perlu login terlebih dahulu untuk melakukan booking.
+        </p>
+        <Link href="/login" className="btn btn-primary">
+          Login Sekarang
+        </Link>
       </div>
     );
   }
 
-  const rentalTotal = days * product.pricePerDay;
-  const grandTotal = rentalTotal;
-
-  const handlePayment = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !wa) {
-      toast.error('Mohon lengkapi data diri');
-      return;
-    }
-    router.push(`/payment/${id}?start=${startParam}&end=${endParam}`);
-  };
+  // ── Invalid params ────────────────────────────────────────────────────────
+  if (isInvalid && !loadingProd) {
+    return (
+      <div className="container" style={{ paddingTop: '150px', textAlign: 'center' }}>
+        <AlertCircle size={48} style={{ color: '#f87171', margin: '0 auto 1rem' }} />
+        <h2>Pesanan Tidak Valid</h2>
+        <p className="text-muted" style={{ margin: '1rem 0 2rem' }}>
+          Silakan pilih produk dan tanggal sewa terlebih dahulu.
+        </p>
+        <Link href="/katalog" className="text-gradient-primary">← Kembali ke Katalog</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="container" style={{ paddingTop: '100px', paddingBottom: 'var(--space-xl)' }}>
@@ -61,15 +118,15 @@ export default function CheckoutPage() {
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
-        {/* Formulir Data Diri */}
+        {/* ── Left: Formulir ── */}
         <div>
-          <form onSubmit={handlePayment} className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
+          <form onSubmit={handleBooking} className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
             <h3 style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Data Penyewa</h3>
-            
+
             <div style={{ marginBottom: '1.5rem' }}>
               <label className="text-muted" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Nama Lengkap</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Masukkan nama lengkap sesuai KTP"
@@ -80,8 +137,8 @@ export default function CheckoutPage() {
 
             <div style={{ marginBottom: '1.5rem' }}>
               <label className="text-muted" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Nomor WhatsApp</label>
-              <input 
-                type="text" 
+              <input
+                type="tel"
                 value={wa}
                 onChange={(e) => setWa(e.target.value)}
                 placeholder="Contoh: 081234567890"
@@ -90,8 +147,19 @@ export default function CheckoutPage() {
               />
             </div>
 
+            <div style={{ marginBottom: '1.5rem' }}>
+              <label className="text-muted" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Catatan (opsional)</label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="Contoh: Ambil jam 10 pagi"
+                rows={3}
+                style={{ width: '100%', padding: '0.8rem', borderRadius: 'var(--radius-sm)', background: 'var(--color-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', resize: 'vertical' }}
+              />
+            </div>
+
             <h3 style={{ marginTop: '2rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Metode Pengambilan</h3>
-            
+
             <div style={{ background: 'var(--color-bg)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-primary)' }}>
               <div className="flex items-center gap-sm">
                 <span style={{ fontSize: '1.5rem' }}>📍</span>
@@ -102,35 +170,45 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem', marginTop: '2rem', fontSize: '1.1rem' }}>
-              Lanjut ke Pembayaran
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ width: '100%', padding: '1rem', marginTop: '2rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+              disabled={loading}
+            >
+              {loading ? <><Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} /> Memproses...</> : 'Lanjut ke Pembayaran'}
             </button>
           </form>
         </div>
 
-        {/* Ringkasan Pesanan */}
+        {/* ── Right: Ringkasan ── */}
         <div>
           <div className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
             <h3 style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Ringkasan Pesanan</h3>
-            
-            <div className="flex gap-sm" style={{ marginBottom: '1.5rem' }}>
-              <div style={{ position: 'relative', width: '80px', height: '80px', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
-                <Image src={product.image} alt={product.name} fill unoptimized style={{ objectFit: 'cover' }} />
+
+            {loadingProd ? (
+              <div style={{ height: '80px', background: 'rgba(255,255,255,0.04)', borderRadius: 12, marginBottom: '1.5rem' }} />
+            ) : product && (
+              <div className="flex gap-sm" style={{ marginBottom: '1.5rem' }}>
+                <div style={{ position: 'relative', width: '80px', height: '80px', borderRadius: 'var(--radius-sm)', overflow: 'hidden', flexShrink: 0 }}>
+                  <Image src={getProductImage(product)} alt={product.name} fill unoptimized style={{ objectFit: 'cover' }} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '1rem', marginBottom: '0.2rem' }}>{product.name}</h4>
+                  <p className="text-muted" style={{ fontSize: '0.85rem' }}>Brand: {product.brand || 'Nexus Outdoor'}</p>
+                  <p className="text-muted" style={{ fontSize: '0.85rem' }}>Kategori: {product.category.name}</p>
+                </div>
               </div>
-              <div>
-                <h4 style={{ fontSize: '1rem', marginBottom: '0.2rem' }}>{product.name}</h4>
-                <p className="text-muted" style={{ fontSize: '0.85rem' }}>Toko: Nexus Outdoor</p>
-              </div>
-            </div>
+            )}
 
             <div style={{ background: 'var(--color-bg)', padding: '1rem', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem' }}>
               <div className="flex justify-between" style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
                 <span className="text-muted">Tanggal Ambil</span>
-                <span>{startParam}</span>
+                <span>{startDate}</span>
               </div>
               <div className="flex justify-between" style={{ fontSize: '0.9rem' }}>
                 <span className="text-muted">Tanggal Kembali</span>
-                <span>{endParam}</span>
+                <span>{endDate}</span>
               </div>
             </div>
 
@@ -140,12 +218,12 @@ export default function CheckoutPage() {
             </div>
             <div className="flex justify-between" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
               <span className="text-muted">Jaminan Identitas</span>
-              <span>KTP/SIM Asli (Ditahan di toko)</span>
+              <span>KTP/SIM Asli</span>
             </div>
-            
+
             <div className="flex justify-between" style={{ fontWeight: 700, fontSize: '1.2rem', borderTop: '1px dashed var(--color-border)', paddingTop: '1rem' }}>
               <span>Total Bayar</span>
-              <span className="text-gradient-primary">Rp {grandTotal.toLocaleString('id-ID')}</span>
+              <span className="text-gradient-primary">Rp {rentalTotal.toLocaleString('id-ID')}</span>
             </div>
           </div>
         </div>
