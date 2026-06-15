@@ -45,15 +45,25 @@ export async function apiFetch<T = unknown>(
     headers,
   });
 
-  const json = await response.json();
+  // Parse JSON dengan aman — server kadang return HTML (rate limit, server error)
+  let json: unknown;
+  const contentType = response.headers.get("content-type") ?? "";
+  if (contentType.includes("application/json")) {
+    json = await response.json();
+  } else {
+    const text = await response.text();
+    console.error(`[API] Non-JSON dari ${endpoint}:`, response.status, text.slice(0, 300));
+    json = { success: false, message: `Server error (${response.status})` };
+  }
 
   if (!response.ok) {
-    // Lempar object JSON agar bisa di-catch dan diparse komponen
+    console.error(`[API] Error ${response.status} dari ${endpoint}:`, json);
     throw json;
   }
 
   return json as T;
 }
+
 
 // ─── Authenticated Fetch ──────────────────────────────────────────────────────
 
