@@ -5,10 +5,10 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { Loader2, AlertCircle, LogIn } from 'lucide-react';
+import { Loader2, AlertCircle } from 'lucide-react';
 import { getProduct, createBooking } from '@/lib/api';
 import { getProductImage, calculateRentalPrice, type ApiProduct } from '@/lib/types';
-import { isLoggedIn } from '@/lib/auth';
+import { useRequireAuth, RouteLoader } from '@/lib/auth-guard';
 
 export default function CheckoutPage() {
   const params       = useParams();
@@ -20,6 +20,7 @@ export default function CheckoutPage() {
   const endDate   = searchParams?.get('end') ?? '';
   const unitId    = Number(searchParams?.get('unit_id'));
   const days      = Number(searchParams?.get('days')) || 0;
+  const ready     = useRequireAuth();
 
   // ── State ────────────────────────────────────────────────────────────────
   const [product, setProduct]     = useState<ApiProduct | null>(null);
@@ -28,22 +29,17 @@ export default function CheckoutPage() {
   const [wa, setWa]               = useState('');
   const [notes, setNotes]         = useState('');
   const [loading, setLoading]     = useState(false);
-  const [notLoggedIn, setNotLoggedIn] = useState(false);
 
-  // ── Cek login & fetch produk ──────────────────────────────────────────────
+  // ── Fetch produk (setelah auth siap) ──────────────────────────────────────
   useEffect(() => {
-    if (!isLoggedIn()) {
-      setNotLoggedIn(true);
-      return;
-    }
-    if (!id) return;
+    if (!ready || !id) return;
 
     setLoadingProd(true);
     getProduct(id)
       .then((res) => setProduct(res.data))
       .catch(() => toast.error('Gagal memuat data produk.'))
       .finally(() => setLoadingProd(false));
-  }, [id]);
+  }, [ready, id]);
 
   // ── Validasi param URL ────────────────────────────────────────────────────
   const isInvalid = !startDate || !endDate || !unitId || days <= 0;
@@ -80,21 +76,8 @@ export default function CheckoutPage() {
     }
   };
 
-  // ── Not logged in state ───────────────────────────────────────────────────
-  if (notLoggedIn) {
-    return (
-      <div className="container" style={{ paddingTop: '150px', textAlign: 'center' }}>
-        <LogIn size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1rem' }} />
-        <h2 style={{ marginBottom: '1rem' }}>Login Diperlukan</h2>
-        <p className="text-muted" style={{ marginBottom: '2rem' }}>
-          Kamu perlu login terlebih dahulu untuk melakukan booking.
-        </p>
-        <Link href="/login" className="btn btn-primary">
-          Login Sekarang
-        </Link>
-      </div>
-    );
-  }
+  // ── Guard auth ──────────────────────────────────────────────────────────────
+  if (!ready) return <RouteLoader />;
 
   // ── Invalid params ────────────────────────────────────────────────────────
   if (isInvalid && !loadingProd) {

@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Mountain, Loader2 } from "lucide-react";
 import { registerCustomer } from "@/lib/api";
 import { setAuth } from "@/lib/auth";
+import { getRedirectTarget } from "@/lib/auth-guard";
 
 const inputBase: React.CSSProperties = {
   padding: "0.85rem 1rem",
@@ -54,7 +55,7 @@ export default function Register() {
         password_confirmation: confirm,
       });
       setAuth(res.data.token, res.data.customer);
-      router.push('/');
+      router.push(getRedirectTarget('/'));
     } catch (err: unknown) {
       const apiErr = err as { message?: string; errors?: Record<string, string[]> };
       const firstError = apiErr?.errors

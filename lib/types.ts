@@ -176,6 +176,20 @@ export const RENTAL_STATUS_COLOR: Record<RentalStatus, string> = {
   OVERDUE: "danger",
 };
 
+/** Mapping nama warna status (dari API) → hex untuk badge UI */
+export const STATUS_COLOR_HEX: Record<string, string> = {
+  gray: "#8b9bb4",
+  warning: "#ffb347",
+  info: "#00E5FF",
+  success: "#4ade80",
+  danger: "#f87171",
+};
+
+/** Ambil hex badge dari status_color rental (fallback abu-abu) */
+export function statusColorHex(color: string): string {
+  return STATUS_COLOR_HEX[color] ?? STATUS_COLOR_HEX.gray;
+}
+
 export interface RentalItem {
   id: number;
   inventory_unit: AvailableUnit;

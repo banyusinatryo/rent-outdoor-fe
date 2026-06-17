@@ -3,12 +3,19 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, LayoutDashboard, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getCustomer, clearAuth } from '@/lib/auth';
+import { logoutCustomer } from '@/lib/api';
+import type { Customer } from '@/lib/types';
 
 export default function Navbar() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [customer, setCustomer] = useState<Customer | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +24,28 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Sinkronkan status login setiap navigasi & saat localStorage berubah (tab lain)
+  useEffect(() => {
+    setCustomer(getCustomer());
+    const sync = () => setCustomer(getCustomer());
+    window.addEventListener('storage', sync);
+    return () => window.removeEventListener('storage', sync);
+  }, [pathname]);
+
+  const handleLogout = async () => {
+    try {
+      await logoutCustomer();
+    } catch {
+      /* token mungkin sudah invalid — tetap lanjut bersihkan sesi lokal */
+    }
+    clearAuth();
+    setCustomer(null);
+    setIsMobileMenuOpen(false);
+    router.push('/');
+  };
+
+  const firstName = customer?.name?.split(' ')[0] ?? '';
 
   return (
     <motion.nav 
@@ -63,12 +92,25 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center hide-on-mobile" style={{ gap: '1rem' }}>
-          <Link href="/login" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
-            Log In
-          </Link>
-          <Link href="/register" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
-            Mulai Sewa
-          </Link>
+          {customer ? (
+            <>
+              <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', gap: '0.4rem' }}>
+                <LayoutDashboard size={16} /> {firstName || 'Dashboard'}
+              </Link>
+              <button onClick={handleLogout} className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', gap: '0.4rem' }}>
+                <LogOut size={16} /> Keluar
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+                Log In
+              </Link>
+              <Link href="/register" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+                Mulai Sewa
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -103,8 +145,18 @@ export default function Navbar() {
             <Link href="/cara-kerja" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Cara Kerja</Link>
             <Link href="/tentang" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Tentang</Link>
             <hr style={{ borderColor: 'var(--color-border)', margin: '0.5rem 0' }} />
-            <Link href="/login" className="btn btn-outline" style={{ justifyContent: 'center' }} onClick={() => setIsMobileMenuOpen(false)}>Log In</Link>
-            <Link href="/register" className="btn btn-primary" style={{ justifyContent: 'center' }} onClick={() => setIsMobileMenuOpen(false)}>Mulai Sewa</Link>
+            {customer ? (
+              <>
+                <Link href="/dashboard" className="btn btn-outline" style={{ justifyContent: 'center', gap: '0.4rem' }} onClick={() => setIsMobileMenuOpen(false)}><LayoutDashboard size={16} /> Dashboard</Link>
+                <Link href="/profile" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Profil Saya</Link>
+                <button onClick={handleLogout} className="btn btn-primary" style={{ justifyContent: 'center', gap: '0.4rem' }}><LogOut size={16} /> Keluar</button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="btn btn-outline" style={{ justifyContent: 'center' }} onClick={() => setIsMobileMenuOpen(false)}>Log In</Link>
+                <Link href="/register" className="btn btn-primary" style={{ justifyContent: 'center' }} onClick={() => setIsMobileMenuOpen(false)}>Mulai Sewa</Link>
+              </>
+            )}
           </div>
         </motion.div>
       )}

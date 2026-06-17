@@ -1,25 +1,37 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Tent, Backpack, Compass, ShieldCheck, Banknote, MapPin, ArrowRight, Star } from "lucide-react";
-import { mockProducts } from "@/data/mockProducts";
+import { Tent, Backpack, Compass, ShieldCheck, Banknote, MapPin, ArrowRight } from "lucide-react";
+import { getProducts } from "@/lib/api";
+import { getProductImage, type ApiProduct } from "@/lib/types";
 
 export default function Home() {
+  const [featuredProducts, setFeaturedProducts] = useState<ApiProduct[]>([]);
+  const [loadingFeatured, setLoadingFeatured] = useState(true);
+
+  useEffect(() => {
+    getProducts({ per_page: 4 })
+      .then((res) => setFeaturedProducts(res.data))
+      .catch(() => { /* abaikan; section sembunyi jika kosong */ })
+      .finally(() => setLoadingFeatured(false));
+  }, []);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const fadeInLeft = {
     hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const fadeInRight = {
     hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const staggerContainer = {
@@ -29,8 +41,6 @@ export default function Home() {
       transition: { staggerChildren: 0.15 },
     },
   };
-
-  const featuredProducts = mockProducts.slice(0, 4);
 
   return (
     <>
@@ -176,7 +186,13 @@ export default function Home() {
 
           {/* Product grid — 4 cols asymmetric */}
           <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1.3fr", gap: "1.5rem", alignItems: "stretch" }}>
-            {featuredProducts.map((product, i) => (
+            {loadingFeatured
+              ? Array.from({ length: 4 }).map((_, i) => (
+                <motion.div key={`feat-skel-${i}`} variants={fadeInUp}>
+                  <div className="glass" style={{ height: "100%", minHeight: i === 0 || i === 3 ? "400px" : "340px", borderRadius: "var(--radius-lg)", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.03)" }} />
+                </motion.div>
+              ))
+              : featuredProducts.map((product, i) => (
               <motion.div
                 key={product.id}
                 variants={fadeInUp}
@@ -205,7 +221,7 @@ export default function Home() {
                   >
                     {/* Image */}
                     <div style={{ position: "relative", height: i === 0 || i === 3 ? "280px" : "220px" }}>
-                      <Image src={product.image} alt={product.name} fill unoptimized style={{ objectFit: "cover" }} />
+                      <Image src={getProductImage(product)} alt={product.name} fill unoptimized style={{ objectFit: "cover" }} />
                       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(3,5,8,0.95) 100%)" }} />
                       {/* Category pill */}
                       <div style={{
@@ -216,10 +232,10 @@ export default function Home() {
                         fontSize: "0.75rem", fontWeight: 600, color: "#fff",
                         display: "flex", alignItems: "center", gap: "0.3rem",
                       }}>
-                        {product.category === "Tenda" && <Tent size={12} />}
-                        {product.category === "Carrier" && <Backpack size={12} />}
-                        {product.category !== "Tenda" && product.category !== "Carrier" && <Compass size={12} />}
-                        {product.category}
+                        {product.category.name === "Tenda" && <Tent size={12} />}
+                        {product.category.name === "Carrier" && <Backpack size={12} />}
+                        {product.category.name !== "Tenda" && product.category.name !== "Carrier" && <Compass size={12} />}
+                        {product.category.name}
                       </div>
                     </div>
                     {/* Content */}
@@ -228,7 +244,7 @@ export default function Home() {
                       <div className="flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "0.8rem" }}>
                         <div>
                           <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--color-primary)" }}>
-                            Rp {product.pricePerDay.toLocaleString("id-ID")}
+                            Rp {product.default_daily_price.toLocaleString("id-ID")}
                           </span>
                           <span className="text-muted" style={{ fontSize: "0.8rem" }}> /hr</span>
                         </div>

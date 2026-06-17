@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { BadgeCheck, Star, AlertCircle, CheckCircle2, Package } from 'lucide-react';
 import { getProduct, getProductAvailability } from '@/lib/api';
 import { getProductImage, calculateRentalPrice, type ApiProduct, type AvailabilityData } from '@/lib/types';
+import { isLoggedIn } from '@/lib/auth';
 
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
 function Skeleton({ w = '100%', h = '20px', mb = '0' }: { w?: string; h?: string; mb?: string }) {
@@ -78,7 +79,13 @@ export default function ProductDetail() {
   const handleBooking = () => {
     if (!availability?.is_available || !availability.available_units[0]) return;
     const unitId = availability.available_units[0].id;
-    router.push(`/checkout/${id}?start=${startDate}&end=${endDate}&unit_id=${unitId}&days=${rentalDays}`);
+    const checkoutUrl = `/checkout/${id}?start=${startDate}&end=${endDate}&unit_id=${unitId}&days=${rentalDays}`;
+    // Belum login → arahkan ke login dulu, lalu kembali ke checkout
+    if (!isLoggedIn()) {
+      router.push(`/login?redirect=${encodeURIComponent(checkoutUrl)}`);
+      return;
+    }
+    router.push(checkoutUrl);
   };
 
   // ── Error state ───────────────────────────────────────────────────────────
