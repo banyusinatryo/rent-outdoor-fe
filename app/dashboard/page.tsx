@@ -103,7 +103,7 @@ export default function DashboardPage() {
             >
               <Link href={`/dashboard/${r.id}`} style={{ display: 'block' }}>
                 <div
-                  className="glass hover-lift"
+                  className="glass hover-lift rental-card"
                   style={{ padding: '1.25rem 1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}
                 >
                   <div style={{ width: 48, height: 48, borderRadius: 'var(--radius-sm)', background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -117,13 +117,13 @@ export default function DashboardPage() {
                     <p className="text-muted" style={{ fontSize: '0.85rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{names}</p>
                     <p className="text-muted" style={{ fontSize: '0.78rem', marginTop: '0.2rem' }}>{r.start_date} → {r.end_date}</p>
                   </div>
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <div className="rental-amount" style={{ textAlign: 'right', flexShrink: 0 }}>
                     <p style={{ fontWeight: 700, color: 'var(--color-primary)' }}>Rp {r.total_amount.toLocaleString('id-ID')}</p>
                     {r.remaining_amount > 0 && (
                       <p style={{ fontSize: '0.72rem', color: '#ffb347' }}>Sisa Rp {r.remaining_amount.toLocaleString('id-ID')}</p>
                     )}
                   </div>
-                  <ChevronRight size={20} className="text-muted" style={{ flexShrink: 0 }} />
+                  <ChevronRight size={20} className="text-muted hide-on-mobile" style={{ flexShrink: 0 }} />
                 </div>
               </Link>
             </motion.div>

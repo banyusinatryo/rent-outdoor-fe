@@ -97,7 +97,7 @@ export default function ProfilePage() {
       {loading ? (
         <div className="glass" style={{ height: '420px', borderRadius: 'var(--radius-lg)', background: 'rgba(255,255,255,0.03)', marginTop: '1.5rem' }} />
       ) : customer && (
-        <form onSubmit={handleSave} className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', marginTop: '1.5rem' }}>
+        <form onSubmit={handleSave} className="glass responsive-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', marginTop: '1.5rem' }}>
           <div style={{ marginBottom: '1.5rem' }}>
             <label className="text-muted" style={labelStyle}>Email</label>
             <input type="email" value={customer.email} disabled style={{ ...inputStyle, opacity: 0.6, cursor: 'not-allowed' }} />

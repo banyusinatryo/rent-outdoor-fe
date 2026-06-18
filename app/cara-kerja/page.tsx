@@ -7,17 +7,17 @@ import Link from "next/link";
 export default function CaraKerja() {
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const fadeInLeft = {
     hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const fadeInRight = {
     hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const staggerContainer = {
@@ -57,6 +57,7 @@ export default function CaraKerja() {
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
+          className="grid-zigzag"
           style={{
             display: "grid",
             gridTemplateColumns: "1.4fr 1fr",
@@ -101,6 +102,7 @@ export default function CaraKerja() {
           {/* Right — Decorative floating glass element */}
           <motion.div
             variants={fadeInRight}
+            className="hide-on-mobile"
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
           >
             <motion.div
@@ -149,6 +151,7 @@ export default function CaraKerja() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={staggerContainer}
+            className="grid-zigzag"
             style={{
               display: "grid",
               gridTemplateColumns: "1.2fr 1fr",
@@ -159,7 +162,7 @@ export default function CaraKerja() {
             {/* Content */}
             <motion.div variants={fadeInLeft} style={{ position: "relative" }}>
               {/* Giant step number */}
-              <span style={{
+              <span className="step-number-bg" style={{
                 position: "absolute",
                 top: "-40px",
                 left: "-10px",
@@ -196,7 +199,7 @@ export default function CaraKerja() {
             </motion.div>
 
             {/* Decorative Glass Card */}
-            <motion.div variants={fadeInRight} style={{ display: "flex", justifyContent: "center" }}>
+            <motion.div variants={fadeInRight} className="hide-on-mobile" style={{ display: "flex", justifyContent: "center" }}>
               <motion.div
                 animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
@@ -229,6 +232,7 @@ export default function CaraKerja() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={staggerContainer}
+            className="grid-zigzag"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1.2fr",
@@ -237,7 +241,7 @@ export default function CaraKerja() {
             }}
           >
             {/* Decorative Glass Card — LEFT */}
-            <motion.div variants={fadeInLeft} style={{ display: "flex", justifyContent: "center" }}>
+            <motion.div variants={fadeInLeft} className="hide-on-mobile" style={{ display: "flex", justifyContent: "center" }}>
               <motion.div
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -266,7 +270,7 @@ export default function CaraKerja() {
             {/* Content — RIGHT */}
             <motion.div variants={fadeInRight} style={{ position: "relative" }}>
               {/* Giant step number */}
-              <span style={{
+              <span className="step-number-bg" style={{
                 position: "absolute",
                 top: "-40px",
                 right: "-10px",
@@ -309,6 +313,7 @@ export default function CaraKerja() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={staggerContainer}
+            className="grid-zigzag"
             style={{
               display: "grid",
               gridTemplateColumns: "1.2fr 1fr",
@@ -319,7 +324,7 @@ export default function CaraKerja() {
             {/* Content */}
             <motion.div variants={fadeInLeft} style={{ position: "relative" }}>
               {/* Giant step number */}
-              <span style={{
+              <span className="step-number-bg" style={{
                 position: "absolute",
                 top: "-40px",
                 left: "-10px",
@@ -356,7 +361,7 @@ export default function CaraKerja() {
             </motion.div>
 
             {/* Decorative Glass Card */}
-            <motion.div variants={fadeInRight} style={{ display: "flex", justifyContent: "center" }}>
+            <motion.div variants={fadeInRight} className="hide-on-mobile" style={{ display: "flex", justifyContent: "center" }}>
               <motion.div
                 animate={{ y: [0, -14, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -394,7 +399,7 @@ export default function CaraKerja() {
           variants={fadeInUp}
         >
           <div
-            className="glass"
+            className="glass cta-glass"
             style={{
               width: "100%",
               padding: "3.5rem 3rem",
@@ -429,7 +434,7 @@ export default function CaraKerja() {
               <CheckCircle2 size={52} color="#4ade80" strokeWidth={1.5} />
             </motion.div>
 
-            <h2 style={{ fontSize: "2.2rem", marginBottom: "0.8rem", letterSpacing: "-0.5px", position: "relative" }}>
+            <h2 style={{ fontSize: "clamp(1.6rem, 4vw, 2.2rem)", marginBottom: "0.8rem", letterSpacing: "-0.5px", position: "relative" }}>
               Siap Untuk Memulai?
             </h2>
             <p className="text-muted" style={{ marginBottom: "2rem", fontSize: "1.15rem", maxWidth: "500px", lineHeight: 1.6, position: "relative" }}>

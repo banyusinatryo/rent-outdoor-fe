@@ -137,11 +137,11 @@ export default function RentalDetailPage() {
       </div>
       <p className="text-muted" style={{ marginBottom: '2rem' }}>Periode sewa: {rental.start_date} → {rental.end_date}</p>
 
-      <div className="grid" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
+      <div className="grid grid-checkout-container" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
         {/* ── Left: Items + Payments + Review ── */}
         <div className="flex flex-col gap-sm">
           {/* Items */}
-          <div className="glass" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)' }}>
+          <div className="glass responsive-card" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)' }}>
             <h3 className="flex items-center gap-xs" style={{ marginBottom: '1.25rem' }}><Package size={18} /> Barang Disewa</h3>
             <div className="flex flex-col gap-sm">
               {rental.items.map((it) => (
@@ -159,7 +159,7 @@ export default function RentalDetailPage() {
           </div>
 
           {/* Payments */}
-          <div className="glass" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)' }}>
+          <div className="glass responsive-card" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)' }}>
             <h3 className="flex items-center gap-xs" style={{ marginBottom: '1.25rem' }}><Receipt size={18} /> Riwayat Pembayaran</h3>
             {rental.payments.length === 0 ? (
               <p className="text-muted" style={{ fontSize: '0.9rem' }}>Belum ada pembayaran.</p>
@@ -186,7 +186,7 @@ export default function RentalDetailPage() {
 
           {/* Review (COMPLETED) */}
           {canReview && (
-            <div className="glass" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(255,179,71,0.25)' }}>
+            <div className="glass responsive-card" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(255,179,71,0.25)' }}>
               <h3 className="flex items-center gap-xs" style={{ marginBottom: '0.5rem' }}><Star size={18} color="#ffb347" /> Beri Ulasan</h3>
               <p className="text-muted" style={{ fontSize: '0.85rem', marginBottom: '1.25rem' }}>Bagikan pengalamanmu menyewa barang ini.</p>
               {uniqueProducts.map((prod) => (
@@ -218,7 +218,7 @@ export default function RentalDetailPage() {
 
         {/* ── Right: Billing + actions ── */}
         <div>
-          <div className="glass" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
+          <div className="glass sidebar-sticky" style={{ padding: '1.75rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
             <h3 style={{ marginBottom: '1.25rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.85rem' }}>Rincian Biaya</h3>
 
             <div style={rowStyle}><span className="text-muted">Subtotal</span><span>Rp {rental.subtotal.toLocaleString('id-ID')}</span></div>

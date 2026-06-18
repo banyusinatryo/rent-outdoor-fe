@@ -260,6 +260,7 @@ export default function Katalog() {
           variants={staggerContainer}
           initial="hidden"
           animate="show"
+          className="katalog-grid"
           style={{
             position: 'relative', zIndex: 1, minHeight: '500px',
             display: 'grid',
@@ -305,7 +306,7 @@ export default function Katalog() {
                     }}
                   >
                     {/* Image */}
-                    <div style={{ position: 'relative', height: '230px', width: '100%' }}>
+                    <div className="katalog-card-image" style={{ position: 'relative', height: '230px', width: '100%' }}>
                       <Image
                         src={getProductImage(product)}
                         alt={product.name}
@@ -332,7 +333,7 @@ export default function Katalog() {
                     </div>
 
                     {/* Content */}
-                    <div style={{ padding: '1.25rem 1.5rem 1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <div className="katalog-card-content" style={{ padding: '1.25rem 1.5rem 1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                       <div className="flex items-center gap-xs" style={{ marginBottom: '0.5rem' }}>
                         <BadgeCheck size={14} color="#4ade80" />
                         <span className="text-muted" style={{ fontSize: '0.78rem', letterSpacing: '0.3px' }}>

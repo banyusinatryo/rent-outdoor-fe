@@ -155,10 +155,10 @@ export default function PaymentPage() {
         </p>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
+      <div className="grid grid-checkout-container" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
         {/* ── Left: Form upload ── */}
         <div>
-          <form onSubmit={handleSubmit} className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
+          <form onSubmit={handleSubmit} className="glass responsive-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
             {/* Instruksi rekening (statis) */}
             <div style={{ background: 'var(--color-bg)', padding: '1rem 1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-primary)', marginBottom: '2rem' }}>
               <h4 style={{ marginBottom: '0.5rem' }}>Tujuan Transfer</h4>
@@ -285,7 +285,7 @@ export default function PaymentPage() {
 
         {/* ── Right: Ringkasan rental ── */}
         <div>
-          <div className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
+          <div className="glass sidebar-sticky" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
             <h3 style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Ringkasan Tagihan</h3>
 
             {loadingRental ? (

@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function Tentang() {
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const staggerContainer = {
@@ -21,7 +21,7 @@ export default function Tentang() {
 
   const scaleIn = {
     hidden: { opacity: 0, scale: 0.85 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.7, ease: "easeOut" } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.7, ease: "easeOut" as const } },
   };
 
   const stats = [
@@ -120,6 +120,7 @@ export default function Tentang() {
             HERO — Asymmetrical Split Layout
         ═══════════════════════════════════════════ */}
         <div
+          className="grid-tentang-hero"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1.2fr",
@@ -197,6 +198,7 @@ export default function Tentang() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+            className="hide-on-mobile"
             style={{ position: "relative", height: "540px" }}
           >
             {/* Large Card — slightly rotated */}
@@ -327,7 +329,7 @@ export default function Tentang() {
               <motion.div
                 key={i}
                 variants={scaleIn}
-                className="hover-lift"
+                className="hover-lift value-card"
                 style={{
                   position: "relative",
                   transform: `translateY(${item.offsetY}px)`,
@@ -421,6 +423,7 @@ export default function Tentang() {
               <motion.div
                 key={i}
                 variants={scaleIn}
+                className="stat-card"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 style={{

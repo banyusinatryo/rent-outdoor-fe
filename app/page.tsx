@@ -119,7 +119,7 @@ export default function Home() {
               Koleksi perlengkapan gunung terlengkap. Sewa mudah, ambil di toko, jaminan identitas. Siap temani setiap langkah Anda.
             </motion.p>
 
-            <motion.div variants={fadeInUp} className="flex gap-sm justify-center">
+            <motion.div variants={fadeInUp} className="flex gap-sm justify-center hero-buttons">
               <Link href="/katalog">
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0 0 35px rgba(0,229,255,0.4)" }}
@@ -185,7 +185,7 @@ export default function Home() {
           </motion.div>
 
           {/* Product grid — 4 cols asymmetric */}
-          <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1.3fr", gap: "1.5rem", alignItems: "stretch" }}>
+          <div className="grid-featured" style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1.3fr", gap: "1.5rem", alignItems: "stretch" }}>
             {loadingFeatured
               ? Array.from({ length: 4 }).map((_, i) => (
                 <motion.div key={`feat-skel-${i}`} variants={fadeInUp}>
@@ -193,74 +193,74 @@ export default function Home() {
                 </motion.div>
               ))
               : featuredProducts.map((product, i) => (
-              <motion.div
-                key={product.id}
-                variants={fadeInUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              >
-                <Link href={`/produk/${product.id}`} style={{ display: "block", height: "100%" }}>
-                  <div
-                    className="glass"
-                    style={{
-                      height: "100%",
-                      borderRadius: "var(--radius-lg)",
-                      overflow: "hidden",
-                      border: "1px solid rgba(255,255,255,0.06)",
-                      transition: "border-color 0.3s, box-shadow 0.3s",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)";
-                      e.currentTarget.style.boxShadow = "0 0 30px rgba(0,229,255,0.1), 0 20px 40px rgba(0,0,0,0.3)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                  >
-                    {/* Image */}
-                    <div style={{ position: "relative", height: i === 0 || i === 3 ? "280px" : "220px" }}>
-                      <Image src={getProductImage(product)} alt={product.name} fill unoptimized style={{ objectFit: "cover" }} />
-                      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(3,5,8,0.95) 100%)" }} />
-                      {/* Category pill */}
-                      <div style={{
-                        position: "absolute", top: "1rem", right: "1rem",
-                        background: "rgba(3,5,8,0.6)", backdropFilter: "blur(10px)",
-                        padding: "0.35rem 0.8rem", borderRadius: "var(--radius-full)",
-                        border: "1px solid rgba(255,255,255,0.1)",
-                        fontSize: "0.75rem", fontWeight: 600, color: "#fff",
-                        display: "flex", alignItems: "center", gap: "0.3rem",
-                      }}>
-                        {product.category.name === "Tenda" && <Tent size={12} />}
-                        {product.category.name === "Carrier" && <Backpack size={12} />}
-                        {product.category.name !== "Tenda" && product.category.name !== "Carrier" && <Compass size={12} />}
-                        {product.category.name}
-                      </div>
-                    </div>
-                    {/* Content */}
-                    <div style={{ padding: "1.2rem 1.5rem", flexGrow: 1, display: "flex", flexDirection: "column" }}>
-                      <h3 style={{ fontSize: "1.1rem", marginBottom: "0.8rem", lineHeight: 1.4, flexGrow: 1 }}>{product.name}</h3>
-                      <div className="flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "0.8rem" }}>
-                        <div>
-                          <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--color-primary)" }}>
-                            Rp {product.default_daily_price.toLocaleString("id-ID")}
-                          </span>
-                          <span className="text-muted" style={{ fontSize: "0.8rem" }}> /hr</span>
-                        </div>
+                <motion.div
+                  key={product.id}
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                >
+                  <Link href={`/produk/${product.id}`} style={{ display: "block", height: "100%" }}>
+                    <div
+                      className="glass"
+                      style={{
+                        height: "100%",
+                        borderRadius: "var(--radius-lg)",
+                        overflow: "hidden",
+                        border: "1px solid rgba(255,255,255,0.06)",
+                        transition: "border-color 0.3s, box-shadow 0.3s",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(0,229,255,0.3)";
+                        e.currentTarget.style.boxShadow = "0 0 30px rgba(0,229,255,0.1), 0 20px 40px rgba(0,0,0,0.3)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    >
+                      {/* Image */}
+                      <div className="featured-image" style={{ position: "relative", height: i === 0 || i === 3 ? "280px" : "220px" }}>
+                        <Image src={getProductImage(product)} alt={product.name} fill unoptimized style={{ objectFit: "cover" }} />
+                        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 50%, rgba(3,5,8,0.95) 100%)" }} />
+                        {/* Category pill */}
                         <div style={{
-                          width: "32px", height: "32px", borderRadius: "50%",
-                          background: "rgba(0,229,255,0.1)", border: "1px solid rgba(0,229,255,0.3)",
-                          display: "flex", alignItems: "center", justifyContent: "center",
+                          position: "absolute", top: "1rem", right: "1rem",
+                          background: "rgba(3,5,8,0.6)", backdropFilter: "blur(10px)",
+                          padding: "0.35rem 0.8rem", borderRadius: "var(--radius-full)",
+                          border: "1px solid rgba(255,255,255,0.1)",
+                          fontSize: "0.75rem", fontWeight: 600, color: "#fff",
+                          display: "flex", alignItems: "center", gap: "0.3rem",
                         }}>
-                          <ArrowRight size={14} color="var(--color-primary)" />
+                          {product.category.name === "Tenda" && <Tent size={12} />}
+                          {product.category.name === "Carrier" && <Backpack size={12} />}
+                          {product.category.name !== "Tenda" && product.category.name !== "Carrier" && <Compass size={12} />}
+                          {product.category.name}
+                        </div>
+                      </div>
+                      {/* Content */}
+                      <div style={{ padding: "1.2rem 1.5rem", flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                        <h3 style={{ fontSize: "1.1rem", marginBottom: "0.8rem", lineHeight: 1.4, flexGrow: 1 }}>{product.name}</h3>
+                        <div className="flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "0.8rem" }}>
+                          <div>
+                            <span style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--color-primary)" }}>
+                              Rp {product.default_daily_price.toLocaleString("id-ID")}
+                            </span>
+                            <span className="text-muted" style={{ fontSize: "0.8rem" }}> /hr</span>
+                          </div>
+                          <div style={{
+                            width: "32px", height: "32px", borderRadius: "50%",
+                            background: "rgba(0,229,255,0.1)", border: "1px solid rgba(0,229,255,0.3)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                          }}>
+                            <ArrowRight size={14} color="var(--color-primary)" />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              ))}
           </div>
         </motion.div>
       </section>
@@ -294,6 +294,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
+            className="grid-steps"
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "2rem", position: "relative" }}
           >
             {/* Connecting line */}

@@ -61,7 +61,7 @@ export default function Navbar() {
         width: '100%', 
         maxWidth: isScrolled ? '850px' : '1200px',
         zIndex: 50, 
-        padding: isScrolled ? '0.8rem 2.5rem' : '1.5rem 1rem',
+        padding: isScrolled ? '0.8rem var(--nav-padding-x, 2.5rem)' : '1.5rem 1rem',
         background: isScrolled ? 'rgba(3, 5, 8, 0.75)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(24px)' : 'none',
         WebkitBackdropFilter: isScrolled ? 'blur(24px)' : 'none',

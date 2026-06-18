@@ -100,10 +100,10 @@ export default function CheckoutPage() {
         <p className="text-muted">Selesaikan pesanan Anda dengan mengisi detail di bawah ini.</p>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
+      <div className="grid grid-checkout-container" style={{ gridTemplateColumns: '1.5fr 1fr', gap: 'var(--space-xl)' }}>
         {/* ── Left: Formulir ── */}
         <div>
-          <form onSubmit={handleBooking} className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
+          <form onSubmit={handleBooking} className="glass responsive-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
             <h3 style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Data Penyewa</h3>
 
             <div style={{ marginBottom: '1.5rem' }}>
@@ -166,7 +166,7 @@ export default function CheckoutPage() {
 
         {/* ── Right: Ringkasan ── */}
         <div>
-          <div className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
+          <div className="glass sidebar-sticky" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
             <h3 style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '1rem' }}>Ringkasan Pesanan</h3>
 
             {loadingProd ? (

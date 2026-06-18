@@ -114,16 +114,16 @@ export default function ProductDetail() {
         <span style={{ color: 'var(--color-text)' }}>{product?.name ?? '...'}</span>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: '1.2fr 1fr', gap: 'var(--space-xl)' }}>
+      <div className="grid grid-detail" style={{ gridTemplateColumns: '1.2fr 1fr', gap: 'var(--space-xl)' }}>
 
         {/* ══════════════════════════════════════════════
             LEFT COL — Informasi Produk
            ══════════════════════════════════════════════ */}
         <div>
           {/* Gambar */}
-          <div className="glass" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', height: '400px', position: 'relative', marginBottom: 'var(--space-md)' }}>
+          <div className="glass product-image" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', height: '400px', position: 'relative', marginBottom: 'var(--space-md)' }}>
             {loadingProd
-              ? <Skeleton w="100%" h="400px" />
+              ? <Skeleton w="100%" h="100%" />
               : product && (
                 <Image
                   src={getProductImage(product)}
@@ -144,7 +144,7 @@ export default function ProductDetail() {
             </>
           ) : product && (
             <>
-              <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{product.name}</h1>
+              <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', marginBottom: '0.5rem' }}>{product.name}</h1>
 
               <div className="flex items-center gap-sm" style={{ marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--color-border)' }}>
                 <div style={{ background: 'var(--color-bg-glass)', padding: '0.2rem 0.8rem', borderRadius: 'var(--radius-full)', fontSize: '0.85rem' }}>
@@ -196,7 +196,7 @@ export default function ProductDetail() {
             RIGHT COL — Booking Widget
            ══════════════════════════════════════════════ */}
         <div>
-          <div className="glass" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
+          <div className="glass sidebar-sticky" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)', position: 'sticky', top: '100px' }}>
 
             {loadingProd ? (
               <>

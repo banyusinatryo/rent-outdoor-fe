@@ -51,6 +51,8 @@ export interface ApiProduct {
   name: string;
   brand: string;
   description: string;
+  featured_image: string | null;
+  featured_image_url: string | null;
   default_daily_price: number;
   pricing_tiers: PricingTier[];
   checklist_template: unknown[];
@@ -73,8 +75,9 @@ export const CATEGORY_IMAGE_MAP: Record<string, string> = {
   "Aksesoris & Gear": "/images/gear_tent.png",
 };
 
-/** Mengambil gambar produk berdasarkan kategori (fallback ke placeholder) */
+/** Mengambil gambar produk: gunakan featured_image_url dari API, fallback ke kategori */
 export function getProductImage(product: ApiProduct): string {
+  if (product.featured_image_url) return product.featured_image_url;
   return CATEGORY_IMAGE_MAP[product.category.name] ?? "/images/gear_tent.png";
 }
 

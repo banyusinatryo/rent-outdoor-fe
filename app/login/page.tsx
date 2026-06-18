@@ -77,6 +77,7 @@ export default function Login() {
           PREMIUM CENTERED GLASS CARD
          ══════════════════════════════════════════════ */}
       <motion.div 
+        className="auth-card"
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -134,7 +135,7 @@ export default function Login() {
         </div>
 
         {/* RIGHT SIDE — Clean Login Form */}
-        <div style={{ flex: "1", padding: "3rem 3.5rem", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", background: "rgba(6, 9, 13, 0.6)" }}>
+        <div className="auth-form" style={{ flex: "1", padding: "3rem 3.5rem", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", background: "rgba(6, 9, 13, 0.6)" }}>
           
           {/* Subtle top edge highlight */}
           <div style={{ position: "absolute", top: 0, left: "10%", right: "10%", height: "1px", background: "linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent)" }} />

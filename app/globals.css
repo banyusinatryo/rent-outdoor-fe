@@ -21,6 +21,7 @@
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 8rem;
+  --nav-padding-x: 2.5rem;
 
   /* Utilities */
   --radius-sm: 12px;
@@ -266,4 +267,207 @@ button {
 
 @media (min-width: 769px) {
   .show-on-mobile { display: none !important; }
+}
+
+/* ── Date Input - Dark Theme Fix ──────────────────────────────────────────── */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(5) hue-rotate(155deg);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile-First Overhaul
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet (≤ 768px) ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --nav-padding-x: 1.25rem;
+  }
+
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .hide-on-mobile { display: none !important; }
+
+  h1 { font-size: 1.8rem !important; }
+  h2 { font-size: 1.5rem !important; }
+
+  /* Any 2-col detail grid → stack */
+  .grid-detail {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md) !important;
+  }
+
+  /* Featured product grid → 2 cols */
+  .grid-featured {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Steps 1-2-3 grid → 1 col */
+  .grid-steps {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Cara kerja zigzag → stack */
+  .grid-zigzag {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Tentang page responsive additions */
+  .grid-tentang-hero {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md) !important;
+  }
+  .value-card, .stat-card {
+    transform: none !important;
+  }
+
+  /* Footer grid → 2 cols on tablet */
+  .grid-footer {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
+  }
+
+  /* Sticky sidebar → normal flow */
+  .sidebar-sticky {
+    position: static !important;
+    padding: 1.5rem !important;
+  }
+
+  .responsive-card {
+    padding: 1.5rem !important;
+  }
+
+  /* Grid checkout and payment container with order reordering */
+  .grid-checkout-container {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-md) !important;
+  }
+  .grid-checkout-container > div:first-child {
+    order: 2 !important;
+  }
+  .grid-checkout-container > div:last-child {
+    order: 1 !important;
+  }
+
+  /* Product image container */
+  .product-image {
+    height: 250px !important;
+  }
+
+  /* Featured card image */
+  .featured-image {
+    height: 160px !important;
+  }
+
+  /* Hero section buttons */
+  .hero-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-buttons .btn {
+    padding: 0.85rem 1.5rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Auth card (login/register) */
+  .auth-card {
+    flex-direction: column !important;
+    max-width: 500px !important;
+    min-height: auto !important;
+  }
+  .auth-form {
+    padding: 2rem 1.5rem !important;
+  }
+
+  /* Dashboard rental card */
+  .rental-card {
+    flex-wrap: wrap;
+  }
+  .rental-card .rental-amount {
+    width: 100%;
+    text-align: left;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Container padding */
+  .container {
+    padding: 0 var(--space-sm);
+  }
+
+  /* Cara kerja: giant step number */
+  .step-number-bg {
+    font-size: 6rem !important;
+  }
+
+  /* CTA section */
+  .cta-glass {
+    padding: 2rem 1.5rem !important;
+  }
+
+  /* Katalog page */
+  .katalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+    gap: var(--space-sm) !important;
+  }
+  .katalog-card-image {
+    height: 160px !important;
+  }
+  .katalog-card-content {
+    padding: 0.75rem 1rem 1rem !important;
+  }
+}
+
+/* ── Small phone (≤ 480px) ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  :root {
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --nav-padding-x: 0.75rem;
+  }
+
+  .grid-featured {
+    grid-template-columns: 1fr !important;
+  }
+
+  .grid-footer {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .auth-form {
+    padding: 1.5rem 1.25rem !important;
+  }
+
+  .responsive-card {
+    padding: 1.25rem 1rem !important;
+  }
+
+  .sidebar-sticky {
+    padding: 1.25rem 1rem !important;
+  }
 }
