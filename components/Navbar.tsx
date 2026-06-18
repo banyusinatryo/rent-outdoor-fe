@@ -84,10 +84,11 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="flex items-center hide-on-mobile" style={{ fontWeight: 500, gap: '2rem', fontSize: '1rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+        <div className="flex items-center hide-on-mobile" style={{ fontWeight: 500, gap: '1.5rem', fontSize: '1rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
           <Link href="/katalog" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Katalog</Link>
           <Link href="/cara-kerja" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Cara Kerja</Link>
+          <Link href="/syarat" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Syarat & Ketentuan</Link>
+          <Link href="/faq" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>FAQ</Link>
           <Link href="/tentang" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Tentang</Link>
         </div>
 
@@ -148,6 +149,8 @@ export default function Navbar() {
           <div className="flex flex-col gap-sm">
             <Link href="/katalog" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Katalog</Link>
             <Link href="/cara-kerja" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Cara Kerja</Link>
+            <Link href="/syarat" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Syarat & Ketentuan</Link>
+            <Link href="/faq" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
             <Link href="/tentang" className="text-muted" onClick={() => setIsMobileMenuOpen(false)}>Tentang</Link>
             <hr style={{ borderColor: 'var(--color-border)', margin: '0.5rem 0' }} />
             {customer ? (
