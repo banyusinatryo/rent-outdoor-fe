@@ -84,30 +84,30 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <div className="flex items-center hide-on-mobile" style={{ fontWeight: 500, gap: '1.5rem', fontSize: '1rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+        <div className="flex items-center hide-on-mobile" style={{ fontWeight: 500, gap: isScrolled ? '0.9rem' : '1.5rem', fontSize: isScrolled ? '0.875rem' : '1rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
           <Link href="/katalog" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Katalog</Link>
           <Link href="/cara-kerja" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Cara Kerja</Link>
-          <Link href="/syarat" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Syarat & Ketentuan</Link>
+          <Link href="/syarat" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>{isScrolled ? 'Syarat' : 'Syarat & Ketentuan'}</Link>
           <Link href="/faq" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>FAQ</Link>
           <Link href="/tentang" className="text-muted hover:text-white" style={{ transition: 'color 0.2s' }}>Tentang</Link>
         </div>
 
-        <div className="flex items-center hide-on-mobile" style={{ gap: '1rem' }}>
+        <div className="flex items-center hide-on-mobile" style={{ gap: isScrolled ? '0.5rem' : '1rem' }}>
           {customer ? (
             <>
-              <Link href="/dashboard" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', gap: '0.4rem' }}>
-                <LayoutDashboard size={16} /> {firstName || 'Dashboard'}
+              <Link href="/dashboard" className="btn btn-outline" style={{ padding: isScrolled ? '0.4rem 0.9rem' : '0.5rem 1.25rem', fontSize: '0.875rem', gap: '0.4rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+                <LayoutDashboard size={15} /> {firstName || 'Dashboard'}
               </Link>
-              <button onClick={handleLogout} className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', gap: '0.4rem' }}>
-                <LogOut size={16} /> Keluar
+              <button onClick={handleLogout} className="btn btn-primary" style={{ padding: isScrolled ? '0.4rem 0.9rem' : '0.5rem 1.25rem', fontSize: '0.875rem', gap: '0.4rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+                <LogOut size={15} /> Keluar
               </button>
             </>
           ) : (
             <>
-              <Link href="/login" className="btn btn-outline" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+              <Link href="/login" className="btn btn-outline" style={{ padding: isScrolled ? '0.4rem 0.9rem' : '0.5rem 1.25rem', fontSize: '0.875rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                 Log In
               </Link>
-              <Link href="/register" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.9rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+              <Link href="/register" className="btn btn-primary" style={{ padding: isScrolled ? '0.4rem 0.9rem' : '0.5rem 1.25rem', fontSize: '0.875rem', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                 Mulai Sewa
               </Link>
             </>
