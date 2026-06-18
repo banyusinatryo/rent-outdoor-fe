@@ -129,15 +129,20 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="glass show-on-mobile"
+          className="show-on-mobile"
           style={{ 
             position: 'absolute', 
             top: '100%', 
-            left: 0, 
-            width: '100%', 
+            left: '0.75rem', 
+            width: 'calc(100% - 1.5rem)', 
             padding: '1.5rem',
-            borderTop: '1px solid var(--color-border)',
-            borderBottom: '1px solid var(--color-border)'
+            background: 'rgba(10, 13, 20, 0.98)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-md)',
+            marginTop: '0.5rem',
+            boxShadow: 'var(--shadow-glow)'
           }}
         >
           <div className="flex flex-col gap-sm">
